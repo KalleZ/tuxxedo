@@ -63,14 +63,14 @@
 		 *
 		 * @var		string
 		 */
-		const VERSION_STRING		= '1.0.0 Alpha 1 (dev)';
+		const VERSION_STRING		= '1.0.0';
 
 		/**
 		 * For if we're in debug mode
 		 *
 		 * @var		boolean
 		 */
-		const DEBUG			= true;
+		const DEBUG			= false;
 
 		/**
 		 * For exposing that an application using Engine
