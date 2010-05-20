@@ -50,7 +50,7 @@
 		 *
 		 * @var		integer
 		 */
-		const VERSION_ID		= '10000';
+		const VERSION_ID		= '10001';
 
 		/**
 		 * Tuxxedo version string, this is the full version string, which 
@@ -63,14 +63,14 @@
 		 *
 		 * @var		string
 		 */
-		const VERSION_STRING		= '1.0.0';
+		const VERSION_STRING		= '1.0.1 (development preview)';
 
 		/**
 		 * For if we're in debug mode
 		 *
 		 * @var		boolean
 		 */
-		const DEBUG			= false;
+		const DEBUG			= true;
 
 		/**
 		 * For exposing that an application using Engine
