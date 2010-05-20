@@ -113,13 +113,7 @@
 								break;
 								case('phrasegroups'):
 								{
-									$query				= $db->query('SELECT COUNT(`id`) as \'phrases\' FROM `' . TUXXEDO_PREFIX . 'phrases` WHERE `phrasegroup` = \'' . $db->escape($s['title']) . '\'');
-									$datastore[$s['title']] 	= Array(
-														'id'		=> $s['id'], 
-														'phrases'	=> ($query && $query->getNumRows() ? (integer) $query->fetchObject()->phrases : 0)
-														);
-
-									unset($query);
+									$datastore[$s['id']][] = $s['title'];
 								}
 								break;
 								case('languages'):

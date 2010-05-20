@@ -88,7 +88,7 @@
 		 */
 		public function cache(Array $phrasegroups, Array &$error_buffer = NULL)
 		{
-			if(!sizeof($phrasegroups) || !sizeof($phrasegroups = array_filter($phrasegroups, Array($this, 'filter'))))
+			if(!sizeof($phrasegroups))
 			{
 				return(false);
 			}
@@ -122,14 +122,14 @@
 				return(false);
 			}
 
-			while($row = $result->fetchAssoc())
+			while($row = $result->fetchObject())
 			{
-				if(!isset($this->phrases[$row['phrasegroup']]))
+				if(!isset($this->phrases[$row->phrasegroup]))
 				{
-					$this->phrases[$row['phrasegroup']] = Array();
+					$this->phrases[$row->phrasegroup] = Array();
 				}
 
-				$this->phrases[$row['phrasegroup']][$row['title']] = $row['translation'];
+				$this->phrases[$row->phrasegroup][$row->title] = $row->translation;
 			}
 
 			return(true);
@@ -230,18 +230,6 @@
 			}
 
 			return($phrases);
-		}
-
-		/**
-		 * Filter callback for checking if a phrasegroup have any 
-		 * elements phrases
-		 *
-		 * @param	string			The phrasegroup to check
-		 * @return	boolean			True if is one or more phrases in that phrasegroup, false if none
-		 */
-		private function filter($phrasegroup)
-		{
-			return($this->tuxxedo->cache->phrasegroups[$phrasegroup]['phrases']);
 		}
 	}
 

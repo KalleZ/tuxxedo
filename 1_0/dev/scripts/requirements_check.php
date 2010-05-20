@@ -17,7 +17,7 @@
 			$this->argv 	= $argv;
 		}
 
-		public function isRequired()
+		function isRequired()
 		{
 			return(($this->options & self::OPT_REQUIRED) > 0);
 		}

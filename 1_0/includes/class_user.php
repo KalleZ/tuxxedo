@@ -130,9 +130,9 @@
 											`' . TUXXEDO_PREFIX . 'sessions` 
 										SET 
 											`location` = \'%s\', 
-											`lastactivity` = %d 
+											`lastactivity` = UNIX_TIMESTAMP() 
 										WHERE 
-											`sessionid` = \'%s\'', $this->tuxxedo->db->escape(TUXXEDO_SELF), session_id(), time());
+											`sessionid` = \'%s\'', $this->tuxxedo->db->escape(TUXXEDO_SELF), session_id());
 				}
 			}
 
@@ -144,14 +144,14 @@
 								\'%s\', 
 								%s,
 								\'%s\', 
-								%d
-							)', session_id(), (is_object($this->userinfo) ? $this->userinfo->id : '\'\''), $this->tuxxedo->db->escape(TUXXEDO_SELF), time());
+								UNIX_TIMESTAMP()
+							)', session_id(), (is_object($this->userinfo) ? $this->userinfo->id : '\'\''), $this->tuxxedo->db->escape(TUXXEDO_SELF));
 
 			$this->tuxxedo->db->setShutdownQuery('
 								DELETE FROM 
 									`' . TUXXEDO_PREFIX . 'sessions` 
 								WHERE 
-									`lastactivity` + %d < %d', self::$options['expires'], time());
+									`lastactivity` + %d < UNIX_TIMESTAMP()', self::$options['expires']);
 		}
 
 		/**

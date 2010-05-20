@@ -25,21 +25,6 @@
 	final class Tuxxedo
 	{
 		/**
-		 * Application name. This is for applications thats powered 
-		 * by the Engine.
-		 *
-		 * @var		string
-		 */
-		const APPLICATION		= '';
-
-		/**
-		 * Application version. Application specific version number.
-		 *
-		 * @var		string
-		 */
-		const APPLICATION_VERSION	= '';
-
-		/**
 		 * Tuxxedo simple version, this contains the current 
 		 * release in the form of:
 		 *
@@ -49,7 +34,7 @@
 	 	 *
 		 * @var		string
 		 */
-		const VERSION			= '1.1.0';
+		const VERSION			= '1.0.0';
 
 		/**
 		 * Tuxxedo version ID, this contains the version id in the form 
@@ -65,7 +50,7 @@
 		 *
 		 * @var		integer
 		 */
-		const VERSION_ID		= 10100;
+		const VERSION_ID		= '10000';
 
 		/**
 		 * Tuxxedo version string, this is the full version string, which 
@@ -78,14 +63,21 @@
 		 *
 		 * @var		string
 		 */
-		const VERSION_STRING		= '1.1.0 (development preview)';
+		const VERSION_STRING		= '1.0.0';
 
 		/**
 		 * For if we're in debug mode
 		 *
 		 * @var		boolean
 		 */
-		const DEBUG			= true;
+		const DEBUG			= false;
+
+		/**
+		 * For exposing that an application using Engine
+		 *
+		 * @var		boolean
+		 */
+		const EXPOSE			= true;
 
 
 		/**

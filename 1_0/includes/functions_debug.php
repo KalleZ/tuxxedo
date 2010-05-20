@@ -35,6 +35,7 @@
 		}
 
 		$stack 	= Array();
+		$skip	= ($e ? 3 : 2);
 		$bt 	= debug_backtrace();
 
 		if($e)
@@ -44,14 +45,14 @@
 
 		foreach($bt as $n => $t)
 		{
-			if($n < 3)
+			if($n < $skip)
 			{
 				continue;
 			}
 
 			$trace = new stdClass;
 
-			$trace->current		= ($n == 3);
+			$trace->current		= ($n == $skip);
 			$trace->callargs	= '';
 			$trace->notes		= (isset($t['type']) && $t['type'] == '::' ? 'Static call' : '');
 			$trace->line		= $trace->file = '';

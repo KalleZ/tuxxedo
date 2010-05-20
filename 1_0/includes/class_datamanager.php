@@ -106,13 +106,6 @@
 		 */
 		const VALIDATE_CALLBACK			= TYPE_CALLBACK;
 
-		/**
-		 * Validation option constant, escape HTML
-		 *
-		 * @var		integer
-		 */
-		const VALIDATE_OPT_ESCAPEHTML		= 0x001F;
-
 
 		/**
 		 * Private instance to the Tuxxedo registry
@@ -189,13 +182,26 @@
 		 */
 		final public static function factory($datamanager, $identifier = NULL, $cached = false)
 		{
+			$datamanager 	= (string) $datamanager;
+			$path		= TUXXEDO_DIR . '/includes/datamanagers/dm_' . $datamanager . '.php';
+			$class		= 'Tuxxedo_Datamanager_API_' . $datamanager;
+
 			if(in_array($datamanager, self::$loaded_datamanagers))
 			{
 				return(new $class($identifier, $cached));
 			}
 
-			$class	= 'Tuxxedo_Datamanager_API_' . $datamanager;
-			$dm 	= new $class($identifier, $cached);
+			if(!is_file($path))
+			{
+				throw new Tuxxedo_Basic_Exception('Unable to find datamanager driver file for \'%s\'', $datamanager);
+			}
+
+			require($path);
+
+			if(!class_exists($class))
+			{
+				throw new Tuxxedo_Basic_Exception('Corrupt datamanager driver, driver class not found for \'%s\'', $datamanager);
+			}
 
 			if(!is_subclass_of($class, __CLASS__))
 			{
@@ -204,7 +210,7 @@
 
 			self::$loaded_datamanagers[] = $datamanager;
 
-			return($dm);
+			return(new $class($identifier, $cached));
 		}
 
 		/**
@@ -376,7 +382,7 @@
 
 			foreach($virtual as $field => $data)
 			{
-				if(isset($this->fields[$field]['validation']) && $this->fields[$field]['validation'] & self::VALIDATE_OPT_ESCAPEHTML)
+				if(isset($this->fields[$field]['validation']) && $this->fields[$field]['validation'] == self::VALIDATE_STRING)
 				{
 					$data = htmlspecialchars($data, ENT_QUOTES);
 				}

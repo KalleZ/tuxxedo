@@ -195,9 +195,7 @@
 						throw new Tuxxedo_Basic_Exception('Invalid datatype');
 					}
 
-					$o = validate_option();
-
-					if(!$o || !$o->getNumRows())
+					if(is_object(validate_option()))
 					{
 						throw new Tuxxedo_Basic_Exception('An option with that name already exists');
 					}
