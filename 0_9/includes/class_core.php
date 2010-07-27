@@ -34,7 +34,7 @@
 	 	 *
 		 * @var		string
 		 */
-		const VERSION			= '1.0.0';
+		const VERSION			= '0.9.0';
 
 		/**
 		 * Tuxxedo version ID, this contains the version id in the form 
@@ -50,7 +50,7 @@
 		 *
 		 * @var		integer
 		 */
-		const VERSION_ID		= '10001';
+		const VERSION_ID		= '00901';
 
 		/**
 		 * Tuxxedo version string, this is the full version string, which 
@@ -63,7 +63,7 @@
 		 *
 		 * @var		string
 		 */
-		const VERSION_STRING		= '1.0.1 (development preview)';
+		const VERSION_STRING		= '0.9.1 (development preview)';
 
 		/**
 		 * For if we're in debug mode
