@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Database_Driver::getAffectedRows
+#labels undocumented method getAffectedRows
+
+=Tuxxedo_Database_Driver::getAffectedRows()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_interface_tuxxedo_database_driver Tuxxedo_Database_Driver]

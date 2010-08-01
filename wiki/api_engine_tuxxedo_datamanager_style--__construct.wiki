@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Datamanager_Style::__construct
+#labels undocumented method __construct
+
+=Tuxxedo_Datamanager_Style::__construct()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo_datamanager_style Tuxxedo_Datamanager_Style]

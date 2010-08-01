@@ -1,0 +1,23 @@
+#summary Class documentation for Tuxxedo_Query_Insert
+#labels undocumented Class
+
+=Tuxxedo_Query_Insert=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || database_query.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_query_insert--__construct Tuxxedo_Query_Insert::__construct()] - ...
+  * [api_engine_tuxxedo_query_insert--values Tuxxedo_Query_Insert::values()] - ...
+
+
+[api_engine Table of Contents]

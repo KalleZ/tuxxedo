@@ -1,0 +1,27 @@
+#summary Class documentation for Tuxxedo_Datamanager_Session
+#labels undocumented Class
+
+=Tuxxedo_Datamanager_Session=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || datamanagers\session.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| fields || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_datamanager_session--__construct Tuxxedo_Datamanager_Session::__construct()] - ...
+
+
+[api_engine Table of Contents]

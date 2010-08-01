@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Config::offsetSet
+#labels undocumented method offsetSet
+
+=Tuxxedo_Config::offsetSet()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo_config Tuxxedo_Config]

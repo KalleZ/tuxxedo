@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo::component
+#labels undocumented method component
+
+=Tuxxedo::component()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo Tuxxedo]

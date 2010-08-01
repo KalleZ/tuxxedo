@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Session::offsetUnset
+#labels undocumented method offsetUnset
+
+=Tuxxedo_Session::offsetUnset()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo_session Tuxxedo_Session]

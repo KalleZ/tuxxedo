@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Query_Select::order
+#labels undocumented method order
+
+=Tuxxedo_Query_Select::order()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo_query_select Tuxxedo_Query_Select]

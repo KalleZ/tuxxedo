@@ -1,0 +1,32 @@
+#summary Class documentation for Tuxxedo_Datastore
+#labels undocumented Class
+
+=Tuxxedo_Datastore=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || cache.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| tuxxedo || ... ||
+|| cache || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_datastore--__construct Tuxxedo_Datastore::__construct()] - ...
+  * [api_engine_tuxxedo_datastore--__get Tuxxedo_Datastore::__get()] - ...
+  * [api_engine_tuxxedo_datastore--free Tuxxedo_Datastore::free()] - ...
+  * [api_engine_tuxxedo_datastore--rebuild Tuxxedo_Datastore::rebuild()] - ...
+  * [api_engine_tuxxedo_datastore--cache Tuxxedo_Datastore::cache()] - ...
+
+
+[api_engine Table of Contents]

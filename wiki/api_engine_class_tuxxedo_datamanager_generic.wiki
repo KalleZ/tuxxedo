@@ -1,0 +1,34 @@
+#summary Class documentation for Tuxxedo_Datamanager_Generic
+#labels undocumented Class
+
+=Tuxxedo_Datamanager_Generic=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || datamanagers\generic.php ||
+
+...
+
+==Constants==
+
+...
+
+|| OPT_TABLENAME || ... ||
+|| OPT_IDENTIFIERNAME || ... ||
+
+==Properties==
+
+...
+
+|| fields || ... ||
+|| options || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_datamanager_generic--__construct Tuxxedo_Datamanager_Generic::__construct()] - ...
+
+
+[api_engine Table of Contents]

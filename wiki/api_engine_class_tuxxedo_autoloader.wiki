@@ -1,0 +1,30 @@
+#summary Class documentation for Tuxxedo_Autoloader
+#labels undocumented Class
+
+=Tuxxedo_Autoloader=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || core.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| classes || ... ||
+|| drivers || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_autoloader--setclassmap Tuxxedo_Autoloader::setClassMap()] - ...
+  * [api_engine_tuxxedo_autoloader--setdrivermap Tuxxedo_Autoloader::setDriverMap()] - ...
+  * [api_engine_tuxxedo_autoloader--load Tuxxedo_Autoloader::load()] - ...
+
+
+[api_engine Table of Contents]

@@ -1,0 +1,38 @@
+#summary Class documentation for Tuxxedo_Database
+#labels undocumented Class
+
+=Tuxxedo_Database=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || database.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| link || ... ||
+|| delayed || ... ||
+|| queries || ... ||
+|| configuration || ... ||
+|| shutdown_queries || ... ||
+|| loaded_drivers || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_database--__construct Tuxxedo_Database::__construct()] - ...
+  * [api_engine_tuxxedo_database--__destruct Tuxxedo_Database::__destruct()] - ...
+  * [api_engine_tuxxedo_database--invoke Tuxxedo_Database::invoke()] - ...
+  * [api_engine_tuxxedo_database--factory Tuxxedo_Database::factory()] - ...
+  * [api_engine_tuxxedo_database--setshutdownquery Tuxxedo_Database::setShutdownQuery()] - ...
+  * [api_engine_tuxxedo_database--getnumqueries Tuxxedo_Database::getNumQueries()] - ...
+  * [api_engine_tuxxedo_database--getqueries Tuxxedo_Database::getQueries()] - ...
+
+
+[api_engine Table of Contents]

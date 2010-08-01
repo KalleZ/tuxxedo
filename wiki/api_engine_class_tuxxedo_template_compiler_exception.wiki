@@ -1,0 +1,22 @@
+#summary Class documentation for Tuxxedo_Template_Compiler_Exception
+#labels undocumented Class
+
+=Tuxxedo_Template_Compiler_Exception=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || template_compiler.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_template_compiler_exception--__construct Tuxxedo_Template_Compiler_Exception::__construct()] - ...
+
+
+[api_engine Table of Contents]

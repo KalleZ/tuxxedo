@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Request_Http::getHeaders
+#labels undocumented method getHeaders
+
+=Tuxxedo_Request_Http::getHeaders()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo_request_http Tuxxedo_Request_Http]

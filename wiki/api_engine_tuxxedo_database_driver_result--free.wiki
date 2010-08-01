@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Database_Driver_Result::free
+#labels undocumented method free
+
+=Tuxxedo_Database_Driver_Result::free()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_interface_tuxxedo_database_driver_result Tuxxedo_Database_Driver_Result]

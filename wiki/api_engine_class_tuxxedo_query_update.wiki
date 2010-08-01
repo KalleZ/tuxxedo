@@ -1,0 +1,26 @@
+#summary Class documentation for Tuxxedo_Query_Update
+#labels undocumented Class
+
+=Tuxxedo_Query_Update=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || database_query.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_query_update--__construct Tuxxedo_Query_Update::__construct()] - ...
+  * [api_engine_tuxxedo_query_update--set Tuxxedo_Query_Update::set()] - ...
+  * [api_engine_tuxxedo_query_update--where Tuxxedo_Query_Update::where()] - ...
+  * [api_engine_tuxxedo_query_update--order Tuxxedo_Query_Update::order()] - ...
+  * [api_engine_tuxxedo_query_update--limit Tuxxedo_Query_Update::limit()] - ...
+
+
+[api_engine Table of Contents]

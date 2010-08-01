@@ -1,0 +1,25 @@
+#summary Class documentation for Tuxxedo_Query_Delete
+#labels undocumented Class
+
+=Tuxxedo_Query_Delete=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || database_query.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_query_delete--__construct Tuxxedo_Query_Delete::__construct()] - ...
+  * [api_engine_tuxxedo_query_delete--where Tuxxedo_Query_Delete::where()] - ...
+  * [api_engine_tuxxedo_query_delete--order Tuxxedo_Query_Delete::order()] - ...
+  * [api_engine_tuxxedo_query_delete--limit Tuxxedo_Query_Delete::limit()] - ...
+
+
+[api_engine Table of Contents]

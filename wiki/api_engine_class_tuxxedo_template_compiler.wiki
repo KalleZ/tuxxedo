@@ -1,0 +1,37 @@
+#summary Class documentation for Tuxxedo_Template_Compiler
+#labels undocumented Class
+
+=Tuxxedo_Template_Compiler=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || template_compiler.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| source || ... ||
+|| compiled_source || ... ||
+|| conditions || ... ||
+|| functions || ... ||
+|| classes || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_template_compiler--__construct Tuxxedo_Template_Compiler::__construct()] - ...
+  * [api_engine_tuxxedo_template_compiler--allowfunction Tuxxedo_Template_Compiler::allowFunction()] - ...
+  * [api_engine_tuxxedo_template_compiler--allowclass Tuxxedo_Template_Compiler::allowClass()] - ...
+  * [api_engine_tuxxedo_template_compiler--set Tuxxedo_Template_Compiler::set()] - ...
+  * [api_engine_tuxxedo_template_compiler--get Tuxxedo_Template_Compiler::get()] - ...
+  * [api_engine_tuxxedo_template_compiler--compile Tuxxedo_Template_Compiler::compile()] - ...
+  * [api_engine_tuxxedo_template_compiler--test Tuxxedo_Template_Compiler::test()] - ...
+
+
+[api_engine Table of Contents]

@@ -1,0 +1,22 @@
+#summary Class documentation for Tuxxedo_Exception
+#labels undocumented Class
+
+=Tuxxedo_Exception=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || exceptions.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_exception--__construct Tuxxedo_Exception::__construct()] - ...
+
+
+[api_engine Table of Contents]

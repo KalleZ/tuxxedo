@@ -1,0 +1,22 @@
+#summary Class documentation for Tuxxedo_Invokable
+#labels undocumented Interface
+
+=Tuxxedo_Invokable=
+
+...
+
+|| *Type* || Interface ||
+|| *Declared in* || core.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_invokable--invoke Tuxxedo_Invokable::invoke()] - ...
+
+
+[api_engine Table of Contents]

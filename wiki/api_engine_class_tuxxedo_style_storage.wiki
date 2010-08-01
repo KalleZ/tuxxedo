@@ -1,0 +1,30 @@
+#summary Class documentation for Tuxxedo_Style_Storage
+#labels undocumented Class
+
+=Tuxxedo_Style_Storage=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || styles.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| tuxxedo || ... ||
+|| templates || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_style_storage--__construct Tuxxedo_Style_Storage::__construct()] - ...
+  * [api_engine_tuxxedo_style_storage--cache Tuxxedo_Style_Storage::cache()] - ...
+  * [api_engine_tuxxedo_style_storage--factory Tuxxedo_Style_Storage::factory()] - ...
+
+
+[api_engine Table of Contents]

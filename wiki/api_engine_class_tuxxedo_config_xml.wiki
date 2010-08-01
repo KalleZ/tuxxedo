@@ -1,0 +1,23 @@
+#summary Class documentation for Tuxxedo_Config_Xml
+#labels undocumented Class
+
+=Tuxxedo_Config_Xml=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || config.php ||
+
+...
+
+
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_config_xml--parse Tuxxedo_Config_Xml::parse()] - ...
+  * [api_engine_tuxxedo_config_xml--xmltoarray Tuxxedo_Config_Xml::xmlToArray()] - ...
+
+
+[api_engine Table of Contents]

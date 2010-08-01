@@ -1,0 +1,34 @@
+#summary Method documentation for Tuxxedo_Database_Driver_MySQLi::connect
+#labels undocumented method connect
+
+=Tuxxedo_Database_Driver_MySQLi::connect()=
+
+...
+
+==Parameter list==
+
+...
+
+|| *Parameter* || *Type* || *Description* || *Notes* ||
+|| ... || ... || ... || ... ||
+
+==Examples==
+
+{{{
+...
+}}}
+
+
+==Change Log==
+
+...
+
+|| *Version* || *Description* ||
+|| ... || ... ||
+
+==See Also==
+
+  * ...
+
+[api_engine Table of Contents]
+[api_engine_class_tuxxedo_database_driver_mysqli Tuxxedo_Database_Driver_MySQLi]

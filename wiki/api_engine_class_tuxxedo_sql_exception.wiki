@@ -1,0 +1,29 @@
+#summary Class documentation for Tuxxedo_SQL_Exception
+#labels undocumented Class
+
+=Tuxxedo_SQL_Exception=
+
+...
+
+|| *Type* || Class ||
+|| *Declared in* || database.php ||
+
+...
+
+
+==Properties==
+
+...
+
+|| sqlstate || ... ||
+
+==Methods==
+
+...
+
+  * [api_engine_tuxxedo_sql_exception--__construct Tuxxedo_SQL_Exception::__construct()] - ...
+  * [api_engine_tuxxedo_sql_exception--getsql Tuxxedo_SQL_Exception::getSQL()] - ...
+  * [api_engine_tuxxedo_sql_exception--getsqlstate Tuxxedo_SQL_Exception::getSQLState()] - ...
+
+
+[api_engine Table of Contents]
