@@ -1,0 +1,46 @@
+#summary Final proposal for class autoloading
+
+= Brief =
+Create an autoloader that can load namespaced (and pseudo-namespaced) classes. The loader must:
+
+  * Be able to find a path for the class, based on it's name
+  * Be based on include_path for accessibility to users
+  * Be useful to the user for loading their own classes
+    * For example, in an MVC app have the loader autoload models, controllers etc. after being given a path.
+  * Be efficient
+  * Be backwards compatible, so that it can be used to load other libraries
+    * For example, alter the class name separator to allow for pseudo-namespaced classes (e.g. `Zend_Db`);
+
+= Tuxxedo Classes =
+Class in the Tuxxedo library should follow these rules:
+
+Assume the library is installed in the path `/library/Tuxxedo/`.
+
+|| *Class* || *Path* ||
+|| Tuxxedo\Registry || Tuxxedo/Registry.php ||
+|| Tuxxedo\Db\Adapter\MySQLi || Tuxxedo/Db/Adapter/MySQLi.php ||
+
+Classes should be organised into components (using namespaces and directories as above) except in special cases (for example, the Loader, Registry etc.).
+
+Interfaces should be named differently where possible, for example an interface for a class named `Tuxxedo\Db\Adapter` could be `Tuxxedo\Db\Adaptable`. 
+
+== Todo ==
+Rename all classes to these rules.
+
+= Implementation =
+
+http://gist.github.com/511804
+
+== Usage ==
+{{{
+spl_autoload_register("Tuxxedo\Loader::load");
+
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
+
+// Load a class using the default rules
+$registry = new Tuxxedo\Registry;
+
+// Load a class from an unwatched library, using "_" as a separator
+Tuxxedo\Loader::addPath("Zend", "~/ZendFW/library/Zend", "_");
+$
+}}}
