@@ -44,3 +44,19 @@ $registry = new Tuxxedo\Registry;
 Tuxxedo\Loader::addPath("Zend", "~/ZendFW/library/Zend", "_");
 $
 }}}
+
+== Efficiency and optimisations == 
+The Load operation looks something like this:
+  # Check the name against each registered namespace match.
+    * O(n) - linear to the amount of registered matches
+  # Generate a partial path
+  # Try and get the absolute path from that partial path by checking if the file exists in include_path.
+    * This is also O(n).
+    * If there was a namespace match and it matched the name of the class we do not do this.
+
+In the worst case, we have to look through all of the registered matches and the whole include_path. To remedy this we can:
+  * Configure the `include_path`.
+    * Absolute paths should be used wherever possible. This will mean that we skip the second O(n) loop completely. This can be done with `realpath`.
+    * The path to the most commonly used library should be first. If all your libraries are in the same /library folder and are reachable by the default router the first path should be to /library.
+    * References to `/usr/share/php` and `/usr/share/pear` should be next. They could be removed if you do not use PEAR. These classes will not be autoloaded as the names are not namespaced (classes like `System` for example).
+    * "." should be at the end of the include_path. It could be removed if you're not using classes in the current directory (unlikely, especially not in an MVC app).
