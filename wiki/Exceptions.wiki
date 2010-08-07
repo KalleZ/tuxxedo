@@ -1,0 +1,14 @@
+#summary Ideas regarding exceptions
+
+= Exceptions =
+
+At the moment each component can add it's own exception class or use something like `Tuxxedo_Exception_Basic`. Since these don't tend to add anything (perhaps some custom properties) it could be better to have:
+
+  * Some generalised exceptions (`FileNotFound`, `InvalidArgument` etc.)
+  * A much more generalised exception that allows custom properties and a tag to identify it
+    * For example, `throw new Tuxxedo_Exception("Controller", "Invalid controller specified") (tag, message)`
+  * Components can still add their own exceptions, but for simple messages they can use the default `Tuxxedo_Exception`.
+
+= Logging =
+
+I'd like a way to log messages throughout my app, visible to a developer interface on each page - like Symfony's developer menu overlay. This could log messages with types info, warning and error (although errors should halt the application with the error page for developers anyway).
