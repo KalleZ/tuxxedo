@@ -1,0 +1,46 @@
+#summary Todo list for changing code to namespacing
+
+= Ordering =
+
+  # Put classes in own files.
+  # Logical directory structuring (see Autoloading).
+  # Remove any `isset('TUXXEDO') or exit;` lines.
+  # Change how exceptions are used:
+    * Add `use Tuxxedo\Exception;` to head of file.
+    * `Tuxxedo_Basic_Exception` = `Exception\Basic`.
+    * `Tuxxedo_SQL_Exception` = `Exception\SQL`.
+  # Remove references to Tuxxedo superglobal object.
+  # Remove index.htmls from directories.
+
+= Components =
+  * Core (in library root)
+    * ~~Registry~~
+    * ~~Version~~
+    * ~~InfoAccess~~ (shortcut to access objects as arrays)
+    * ~~Invokable~~ (interface for requiring the Registry, with a config array)
+  * Database
+    * ~~Drivers~~
+    * ~~Abstracts and interfaces for Driver and Result~~
+    * Query builder (soon)
+  * MVC
+    * ~~Controller~~
+    * ~~Model~~
+    * View (soon)
+      * File
+      * Style (database)
+  * Request
+    * ~~Http request~~
+  * Router
+    * ~~Uri-based router~~
+    * REST-based router (soon)
+    * CLI router (soon)
+  * Datamanagers
+  * Filtering
+  * Validation (soon)
+  * Config (soon)
+    * File reader
+    * Compiler (serialize)
+  * Caching (soon)
+  * Internationalisation (i18n)
+  * Web components (API accessors) (soon)
+    * Twitter
