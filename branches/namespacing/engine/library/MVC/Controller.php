@@ -12,46 +12,8 @@
 	 * =============================================================================
 	 */
 
-	defined('TUXXEDO') or exit;
-
-
-	/**
-	 * Interface for dispatchable controller hooks
-	 *
-	 * @author		Kalle Sommer Nielsen	<kalle@tuxxedo.net>
-	 * @author		Ross Masters 		<ross@tuxxedo.net>
-	 * @version		1.0
-	 * @package		Engine
-	 * @subpackage		MVC
-	 */
-	interface Tuxxedo_Controller_Dispatchable
-	{
-		/**
-		 * Dispatch hook constant - Pre dispatching
-		 *
-		 * @var		integer
-		 */
-		const DISPATCH_PRE		= 1;
-
-		/**
-		 * Dispatch hook constant - Post dispatching
-		 *
-		 * @var		integer
-		 */
-		const DISPATCH_POST		= 2;
-
-
-		/**
-		 * Controller dispatch hook, this hook is called for 
-		 * both pre and post dispatching and uses its only 
-		 * parameter to determine which state we currently are 
-		 * in
-		 *
-		 * @param	integer				The current dispatcher state
-		 * @return	void				No value is returned
-		 */
-		public function dispatcher($mode);
-	}
+    namespace Tuxxedo\MVC;
+    use Tuxxedo\Exception;
 
 	/**
 	 * The base controller class for the MVC components
@@ -62,7 +24,7 @@
 	 * @package		Engine
 	 * @subpackage		MVC
 	 */
-	abstract class Tuxxedo_Controller
+	abstract class Controller
 	{
 		/**
 		 * Private instance to the Tuxxedo registry
@@ -155,7 +117,7 @@
 		 */
 		final public function dispatch()
 		{
-			if($this instanceof Tuxxedo_Controller_Dispatchable)
+			if($this instanceof Controller\Dispatchable)
 			{
 				$this->dispatcher(self::DISPATCH_PRE);
 			}
@@ -164,12 +126,12 @@
 
 			if(!method_exists($this, $method))
 			{
-				throw new Tuxxedo_Exception('Unknown action called');
+				throw new Exception('Unknown action called');
 			}
 
 			$this->$method();
 
-			if($this instanceof Tuxxedo_Controller_Dispatchable)
+			if($this instanceof Controller\Dispatchable)
 			{
 				$this->dispatcher(self::DISPATCH_POST);
 			}
@@ -178,7 +140,7 @@
 		 	 * @TODO	This will change once the Tuxxedo_View class is implemented
 			 */
 			eval('$view = "' . $this->tuxxedo->style->fetch($this->view) . '";');
-			eval('return("' . $this->layout . ");');
+			eval('return("' . $this->layout . '");');
 		}
 	}
 ?>

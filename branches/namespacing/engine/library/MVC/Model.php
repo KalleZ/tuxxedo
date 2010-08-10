@@ -12,6 +12,9 @@
 	 * =============================================================================
 	 */
     
+    namespace Tuxxedo\MVC;
+    use \Tuxxedo\Exception;
+    
     /**
      * Model class
      * In a MVC application this would be extended to create logical models,
@@ -21,7 +24,7 @@
      * tedious, without having to write the same methods for each model.
      * @package     Engine
      */
-    class Tuxxedo_Model
+    class Model
     {
         protected $methods;
         
@@ -55,7 +58,7 @@
          * individually).
          * @param   array   An associative array of properties to set
          */
-        public function setOptions(Array $options) {
+        public function setOptions(array $options) {
             foreach ($options as $property => $value) {
                 $this->set($property, $value);
             }
@@ -106,7 +109,7 @@
             } elseif ($prefix == "get") {
                 $this->get($property);
             } else {
-                throw new Tuxxedo_Basic_Exception("Undefined method '$method' called.");
+                throw new Exception\Basic("Undefined method '$method' called.");
             }
         }
         
@@ -122,7 +125,8 @@
             } elseif (property_exists($this, $property)) {
                 $this->$property = $value;
             } else {
-                throw new Tuxxedo_Basic_Exception("Invalid property given.");
+                echo ": exception\n";
+                throw new Exception\Basic("Invalid property given.");
             }
         }
         
@@ -139,7 +143,7 @@
             } elseif (property_exists($this, $property)) {
                 return $this->$property;
             } else {
-                throw new Tuxxedo_Basic_Exception("Invalid property given.");
+                throw new Exception\Basic("Invalid property given.");
             }
         }
     }

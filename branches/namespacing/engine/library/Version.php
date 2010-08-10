@@ -35,7 +35,7 @@
 	 * @package		Engine
 	 * @subpackage		Core
 	 */
-	class Versioning
+	class Version
 	{
 		/**
 		 * Engine simple version, this contains the current 
