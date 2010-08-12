@@ -11,9 +11,11 @@
     * `Tuxxedo_SQL_Exception` = `Exception\SQL`.
   # Remove references to Tuxxedo superglobal object.
     * Replace with Registry references.
-  # Remove index.htmls from directories.
+  # ~~Remove index.htmls from directories.~~
 
 = Components =
+Striked-through are ported to namespaces.
+
   * Core (in library root)
     * ~~Registry~~
     * ~~Version~~
@@ -22,7 +24,7 @@
   * Database
     * ~~Drivers~~
     * ~~Abstracts and interfaces for Driver and Result~~
-    * Query builder (soon)
+    * ~~Query builder~~
   * MVC
     * ~~Controller~~
     * ~~Model~~
@@ -35,13 +37,13 @@
     * ~~Uri-based router~~
     * REST-based router (soon)
     * CLI router (soon)
-  * Datamanagers
-  * Filtering
+  * ~~Datamanagers~~
+  * ~~Filtering~~
   * Validation (soon)
-  * Config (soon)
+  * ~~Config~~
     * File reader
     * Compiler (serialize)
-  * Caching (soon)
-  * Internationalisation (i18n)
+  * ~~Caching~~
+  * ~~Internationalisation (i18n)~~
   * Web components (API accessors) (soon)
     * Twitter
