@@ -12,8 +12,7 @@
 	 * =============================================================================
 	 */
 
-	defined('TUXXEDO') or exit;
-
+	namespace Tuxxedo;
 
 	/**
 	 * Backtrace handler

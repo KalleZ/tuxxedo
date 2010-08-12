@@ -12,8 +12,7 @@
 	 * =============================================================================
 	 */
 
-	defined('TUXXEDO') or exit;
-
+	namespace Tuxxedo;
 
 	/**
 	 * Exception handler, this terminates the script execution 
@@ -602,6 +601,7 @@
 	/**
 	 * Format a translation string
 	 *
+
 	 * @param	string			The phrase to perform replacements on
 	 * @param	scalar			Replacement string #1
 	 * @param	scalar			Replacement string #n
