@@ -2,14 +2,15 @@
 
 = Ordering =
 
-  # Put classes in own files.
-  # Logical directory structuring (see Autoloading).
-  # Remove any `isset('TUXXEDO') or exit;` lines.
+  # ~~Put classes in own files.~~
+  # ~~Logical directory structuring (see Autoloading).~~
+  # ~~Remove any `isset('TUXXEDO') or exit;` lines.~~
   # Change how exceptions are used:
     * Add `use Tuxxedo\Exception;` to head of file.
     * `Tuxxedo_Basic_Exception` = `Exception\Basic`.
     * `Tuxxedo_SQL_Exception` = `Exception\SQL`.
   # Remove references to Tuxxedo superglobal object.
+    * Replace with Registry references.
   # Remove index.htmls from directories.
 
 = Components =
