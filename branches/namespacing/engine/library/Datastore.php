@@ -12,7 +12,7 @@
 	 * =============================================================================
 	 */
 
-	defined('TUXXEDO') or exit;
+	namespace Tuxxedo;
 
 
 	/**
@@ -25,7 +25,7 @@
 	 * @version		1.0
 	 * @package		Engine
 	 */
-	class Tuxxedo_Datastore
+	class Datastore
 	{
 		/**
 		 * Private instance to the Tuxxedo registry

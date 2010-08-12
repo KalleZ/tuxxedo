@@ -12,8 +12,8 @@
 	 * =============================================================================
 	 */
 
-	defined('TUXXEDO') or exit;
-
+	namespace Tuxxedo;
+	use Tuxxedo\Exception;
 
 	/**
 	 * Abstract datamanager class
@@ -26,7 +26,7 @@
 	 * @version		1.0
 	 * @package		Engine
 	 */
-	abstract class Tuxxedo_Datamanager extends Tuxxedo_InfoAccess
+	abstract class Datamanager extends InfoAccess
 	{
 		/**
 		 * Indicates that a field is required
@@ -54,35 +54,35 @@
 		 *
 		 * @var		integer
 		 */
-		const VALIDATE_NUMERIC			= Tuxxedo_Filter::TYPE_NUMERIC;
+		const VALIDATE_NUMERIC			= Filter::TYPE_NUMERIC;
 
 		/**
 		 * Validation constant, string value
 		 *
 		 * @var		integer
 		 */
-		const VALIDATE_STRING			= Tuxxedo_Filter::TYPE_STRING;
+		const VALIDATE_STRING			= Filter::TYPE_STRING;
 
 		/**
 		 * Validation constant, email value
 		 *
 		 * @var		integer
 		 */
-		const VALIDATE_EMAIL			= Tuxxedo_Filter::TYPE_EMAIL;
+		const VALIDATE_EMAIL			= Filter::TYPE_EMAIL;
 
 		/**
 		 * Validation constant, boolean value
 		 *
 		 * @var		integer
 		 */
-		const VALIDATE_BOOLEAN			= Tuxxedo_Filter::TYPE_BOOLEAN;
+		const VALIDATE_BOOLEAN			= Filter::TYPE_BOOLEAN;
 
 		/**
 		 * Validation constant, callback
 		 *
 		 * @var		integer
 		 */
-		const VALIDATE_CALLBACK			= Tuxxedo_Filter::TYPE_CALLBACK;
+		const VALIDATE_CALLBACK			= Filter::TYPE_CALLBACK;
 
 		/**
 		 * Validation option constant, escape HTML
@@ -139,14 +139,14 @@
 		 *
 		 * @var		array
 		 */
-		protected $data				= Array();
+		protected $data				= array();
 
 		/**
 		 * Current data thats been set via the set method
 		 *
 		 * @var		array
 		 */
-		protected $userdata			= Array();
+		protected $userdata			= array();
 
 		/**
 		 * List of loaded datamanagers used for caching in the 
@@ -155,7 +155,7 @@
 		 *
 		 * @var		array
 		 */
-		protected static $loaded_datamanagers 	= Array();
+		protected static $loaded_datamanagers 	= array();
 
 		/**
 		 * List of fields that had one or more errors and therefore 
@@ -163,7 +163,7 @@
 		 *
 		 * @var		array
 		 */
-		protected $invalid_fields		= Array();
+		protected $invalid_fields		= array();
 
 
 		/**
@@ -200,12 +200,12 @@
 			{
 				if(!$tuxxedo->intl)
 				{
-					throw new Tuxxedo_Basic_Exception('Initialization is not instanciated for form data phrases');
+					throw new Exception\Basic('Initialization is not instanciated for form data phrases');
 				}
 
-				if(!$tuxxedo->intl->cache(Array('datamanagers')))
+				if(!$tuxxedo->intl->cache(array('datamanagers')))
 				{
-					throw new Tuxxedo_Basic_Exception('Unable to cache datamanager phrases');
+					throw new Exception\Basic('Unable to cache datamanager phrases');
 				}
 			}
 
@@ -214,12 +214,12 @@
 				return(new $class($tuxxedo, $identifier));
 			}
 
-			$class	= 'Tuxxedo_Datamanager_' . $datamanager;
+			$class	= 'Datamanager\\' . $datamanager;
 			$dm 	= new $class($tuxxedo, $identifier);
 
 			if(!is_subclass_of($class, __CLASS__))
 			{
-				throw new Tuxxedo_Basic_Exception('Corrupt datamanager driver, driver class does not follow the driver specification');
+				throw new Exception\Basic('Corrupt datamanager driver, driver class does not follow the driver specification');
 			}
 
 			self::$loaded_datamanagers[] = $datamanager;
@@ -407,7 +407,7 @@
 					$formdata[$field] = ($intl && isset($phrase['dm_' . $this->dmname . '_' . $field]) ? $phrase['dm_' . $this->dmname . '_' . $field] : $field);
 				}
 
-				throw new Tuxxedo_Formdata_Exception($formdata);
+				throw new Exception\Formdata($formdata);
 			}
 
 			$values			= '';
@@ -433,7 +433,7 @@
 				return(false);
 			}
 
-			if($this instanceof Tuxxedo_Datamanager_API_Cache)
+			if($this instanceof Datamanager\APICache)
 			{
 				return($this->rebuild($this->tuxxedo, $virtual));
 			}
@@ -465,28 +465,3 @@
 									`' . $this->idname .'` = \'%s\'', $this->tuxxedo->db->escape($this->identifier)));
 		}
 	}
-
-
-	/**
-	 * Datastore requirement for using the datamanager
-	 *
-	 * This interface is for datamanagers that interacts with the datastore 
-	 * cache to rebuild it to prevent manual update of it.
-	 *
-	 * @author		Kalle Sommer Nielsen <kalle@tuxxedo.net>
-	 * @version		1.0
-	 * @package		Engine
-	 */
-	interface Tuxxedo_Datamanager_API_Cache
-	{
-		/**
-		 * This event method is called if the query to store the 
-		 * data was success, to rebuild the datastore cache
-		 *
-		 * @param	Tuxxedo			The Tuxxedo object reference
-		 * @param	array			A virtually populated array from the datamanager abstraction
-		 * @return	boolean			Returns true if the datastore was updated with success, otherwise false
-		 */
-		public function rebuild(Tuxxedo $tuxxedo, Array $virtual);
-	}
-?>
