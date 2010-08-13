@@ -25,7 +25,7 @@
 	 * @package		Engine
 	 * @subpackage		Core
 	 */
-	namespace Tuxxedo\Core;
+	namespace Tuxxedo;
 
 	/**
 	 * Registry class, this acts as a mixed singleton/registry 
