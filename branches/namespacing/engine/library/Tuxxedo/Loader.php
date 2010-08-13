@@ -76,7 +76,12 @@ class Loader
             $path = self::getPathDefault($name);
         }
         
-        echo "$name (matched $matched) - $path\n";
+        require_once $path;
+        
+        // Check class/interface actually declared
+        if (!class_exists($name) && !interface_exists($name)) {
+            throw new Exception\Basic("Class/interface $name not declared in $path.");
+        }
     }
     
     /**
@@ -130,9 +135,9 @@ class Loader
         
         $found = false;
         foreach (explode(PATH_SEPARATOR, get_include_path()) as $incPath) {
-            $fullPath = realpath($incPath . $path);
+            $fullPath = $incPath . "/" . $path;
             if (file_exists($fullPath)) {
-                $found = $fullPath;
+                $found = realpath($fullPath);
             }
         }
         
