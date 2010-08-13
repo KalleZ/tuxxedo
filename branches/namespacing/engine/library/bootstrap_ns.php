@@ -12,20 +12,6 @@
 	 * =============================================================================
 	 */
 
-
-	/**
-	 * This odd check must be here in order to prevent direct execution 
-	 * of the bootstrap script
-	 */
-	(sizeof(get_included_files()) != 1) or exit;
-
-	/**
-	 * General constant needed to access include files
-	 *
-	 * @var		boolean
-	 */
-	define('TUXXEDO', true);
-
 	/**
 	 * Disable html errors, so error messages dont link to the 
 	 * manual
@@ -63,16 +49,16 @@
 	/**
 	 * Include general functions
 	 */
-	require(TUXXEDO_LIBRARY . '/tuxxedo/functions.php');
+	require(TUXXEDO_LIBRARY . '/Tuxxedo/functions.php');
 
 	/**
 	 * Set various handlers for errors, exceptions and 
 	 * shutdown
 	 */
-//	set_error_handler('tuxxedo_error_handler');
-//	set_exception_handler('tuxxedo_exception_handler');
-//	register_shutdown_function('tuxxedo_shutdown_handler');
-	spl_autoload_register('tuxxedo_handler_autoload');
+	set_error_handler('Tuxxedo\tuxxedo_error_handler');
+	set_exception_handler('Tuxxedo\tuxxedo_exception_handler');
+	register_shutdown_function('Tuxxedo\tuxxedo_shutdown_handler');
+	spl_autoload_register("Tuxxedo\Loader::load");
 
 	/**
 	 * Set database table prefix constant
