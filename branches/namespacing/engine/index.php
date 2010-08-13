@@ -20,7 +20,7 @@
 	{
 		require('./library/bootstrap_ns.php');
 
-		echo('Tuxxedo Engine version: ' . Core\Versioning::FULL . (TUXXEDO_DEBUG ? ' (DEBUG)' : ''));
+		echo('Tuxxedo Engine version: ' . Tuxxedo\Version::FULL . (TUXXEDO_DEBUG ? ' (DEBUG)' : ''));
 	}
 	else
 	{
