@@ -98,9 +98,9 @@
 		 * @throws	Tuxxedo_Exception	Throws an exception if the user id is set and it failed to load for some reason
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if a database call fails
 		 */
-		public function __construct(Tuxxedo $tuxxedo, $identifier = NULL)
+		public function __construct(Registry $registry, $identifier = NULL)
 		{
-			$this->tuxxedo 		= $tuxxedo;
+			$this->registry 		= $registry;
 
 			$this->dmname		= 'user';
 			$this->tablename	= TUXXEDO_PREFIX . 'users';
@@ -155,9 +155,9 @@
 		 * @param	integer			The usergroup id to check for validity
 		 * @return	boolean			Returns true if the usergroup is loaded and exists in the datastore cache, otherwise false
 		 */
-		public static function isValidUsergroup(Tuxxedo $tuxxedo, $id)
+		public static function isValidUsergroup(Registry $registry, $id)
 		{
-			return(isset($tuxxedo->cache->usergroups[$id]));
+			return(isset($registry->cache->usergroups[$id]));
 		}
 
 		/**
@@ -167,9 +167,9 @@
 		 * @param	string			The timezone name to check for validity
 		 * @return	boolean			Returns true if the timezone is loaded and exists in the datastore cache, otherwise false
 		 */
-		public static function isValidTimezone(Tuxxedo $tuxxedo, $timezone)
+		public static function isValidTimezone(Registry $registry, $timezone)
 		{
-			return(isset($tuxxedo->cache->timezones[$timezone]));
+			return(isset($registry->cache->timezones[$timezone]));
 		}
 
 		/**
@@ -179,14 +179,14 @@
 		 * @param	string			The timezone name
 		 * @return	string			Returns the timezone offset, or 0 if the timezone name was invalid
 		 */
-		public static function getTimezoneOffset(Tuxxedo $tuxxedo, $timezone)
+		public static function getTimezoneOffset(Registry $registry, $timezone)
 		{
-			if(!self::isValidTimezone($tuxxedo, $timezone))
+			if(!self::isValidTimezone($registry, $timezone))
 			{
 				return(0);
 			}
 
-			return($tuxxedo->cache->timezones[$timezone]);
+			return($registry->cache->timezones[$timezone]);
 		}
 
 		/**
@@ -196,16 +196,16 @@
 		 * @param	string			The username to check
 		 * @return	boolean			Returns true if the username is free to be taken, otherwise false
 		 */
-		public static function isValidUsername(Tuxxedo $tuxxedo, $username)
+		public static function isValidUsername(Registry $registry, $username)
 		{
-			$query = $tuxxedo->db->query('
+			$query = $registry->db->query('
 							SELECT 
 								* 
 							FROM 
 								`' . TUXXEDO_PREFIX . 'users` 
 							WHERE 
 								`username` = \'%s\' 
-							LIMIT 1', $tuxxedo->db->escape($username))
+							LIMIT 1', $registry->db->escape($username))
 
 			return($query && $query->getNumRows() == 0);
 		}
@@ -216,9 +216,9 @@
 		 * @param	integer			The style id
 		 * @return	boolean			True if the style exists, otherwise false
 		 */
-		public static function isValidStyleId(Tuxxedo $tuxxedo, $styleid)
+		public static function isValidStyleId(Registry $registry, $styleid)
 		{
-			return($tuxxedo->cache->styleinfo && isset($tuxxedo->cache->styleinfo[$styleid]));
+			return($registry->cache->styleinfo && isset($registry->cache->styleinfo[$styleid]));
 		}
 
 		/**
@@ -227,8 +227,8 @@
 		 * @param	integer			The language id
 		 * @return	boolean			True if the language exists, otherwise false
 		 */
-		public static function isValidLanguageId(Tuxxedo $tuxxedo, $languageid)
+		public static function isValidLanguageId(Registry $registry, $languageid)
 		{
-			return($tuxxedo->cache->languages && isset($tuxxedo->cache->languages[$languageid]));
+			return($registry->cache->languages && isset($registry->cache->languages[$languageid]));
 		}
 	}

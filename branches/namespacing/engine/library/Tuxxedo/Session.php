@@ -60,7 +60,7 @@
 		 * @param	array			The options array
 		 * @return	object			Object instance
 		 */
-		final public static function invoke(Tuxxedo $tuxxedo, Array $configuration = NULL, Array $options = NULL)
+		final public static function invoke(Registry $registry, Array $configuration = NULL, Array $options = NULL)
 		{
 			self::$options = Array(
 						'expires'	=> $options['cookie_expires'], 

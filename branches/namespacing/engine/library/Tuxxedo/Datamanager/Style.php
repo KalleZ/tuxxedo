@@ -62,9 +62,9 @@
 		 * @throws	Tuxxedo_Exception	Throws an exception if the style id is set and it failed to load for some reason
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if a database call fails
 		 */
-		public function __construct(Tuxxedo $tuxxedo, $identifier = NULL)
+		public function __construct(Registry $registry, $identifier = NULL)
 		{
-			$this->tuxxedo 		= $tuxxedo;
+			$this->registry 		= $registry;
 
 			$this->dmname		= 'style';
 			$this->tablename	= TUXXEDO_PREFIX . 'styles';
@@ -73,7 +73,7 @@
 
 			if($identifier !== NULL)
 			{
-				$styles = $tuxxedo->db->query('
+				$styles = $registry->db->query('
 								SELECT 
 									* 
 								FROM 
@@ -100,15 +100,15 @@
 		 * @param	array			A virtually populated array from the datamanager abstraction
 		 * @return	boolean			Returns true if the datastore was updated with success, otherwise false
 		 */
-		public function rebuild(Tuxxedo $tuxxedo, Array $virtual)
+		public function rebuild(Registry $registry, Array $virtual)
 		{
-			if(($datastore = $this->tuxxedo->cache->styleinfo) === false)
+			if(($datastore = $this->registry->cache->styleinfo) === false)
 			{
 				$datastore = Array();
 			}
 			
 			$datastore[(integer) $this->identifier] = $virtual;
 
-			return($this->tuxxedo->cache->rebuild('styleinfo', $datastore));
+			return($this->registry->cache->rebuild('styleinfo', $datastore));
 		}
 	}

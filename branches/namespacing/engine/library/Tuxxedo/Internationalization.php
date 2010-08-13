@@ -30,9 +30,9 @@
 		/**
 		 * Private instance to the Tuxxedo registry
 		 *
-		 * @var		Tuxxedo
+		 * @var		Registry
 		 */
-		protected $tuxxedo;
+		protected $registry;
 
 		/**
 		 * Holds the current loaded phrases
@@ -49,9 +49,9 @@
 		 */
 		public function __construct(Array $languageinfo)
 		{
-			global $tuxxedo;
+			global $registry;
 
-			$this->tuxxedo		= $tuxxedo;
+			$this->registry		= $registry;
 			$this->information 	= $languageinfo;
 		}
 
@@ -66,10 +66,10 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if an invalid (or not cached) language id was used
 		 */
-		public static function invoke(Tuxxedo $tuxxedo, Array $configuration = NULL, Array $options = NULL)
+		public static function invoke(Registry $registry, Array $configuration = NULL, Array $options = NULL)
 		{
 			$languagedata 	= $tuxxedo->cache->languages;
-			$languageid	= ($options ? (isset($tuxxedo->userinfo->id) && $tuxxedo->userinfo->language_id !== NULL && $tuxxedo->userinfo->language_id != $options['language_id'] ? $tuxxedo->userinfo->language_id : $options['language_id']) : 0);
+			$languageid	= ($options ? (isset($registry->userinfo->id) && $registry->userinfo->language_id !== NULL && $registry->userinfo->language_id != $options['language_id'] ? $registry->userinfo->language_id : $options['language_id']) : 0);
 
 			if($languageid && isset($languagedata[$languageid]))
 			{
@@ -96,7 +96,7 @@
 				return(false);
 			}
 
-			$result = $this->tuxxedo->db->query('
+			$result = $this->registry->db->query('
 								SELECT 
 									`title`, 
 									`translation`, 
@@ -109,7 +109,7 @@
 										`phrasegroup` IN (
 											\'%s\'
 										);', 
-								$this['id'], join('\', \'', array_map(Array($this->tuxxedo->db, 'escape'), $phrasegroups)));
+								$this['id'], join('\', \'', array_map(Array($this->registry->db, 'escape'), $phrasegroups)));
 
 			if($result && !$result->getNumRows())
 			{
@@ -244,6 +244,6 @@
 		 */
 		private function filter($phrasegroup)
 		{
-			return(isset($this->tuxxedo->cache->phrasegroups[$phrasegroup]) && $this->tuxxedo->cache->phrasegroups[$phrasegroup]['phrases']);
+			return(isset($this->registry->cache->phrasegroups[$phrasegroup]) && $this->registry->cache->phrasegroups[$phrasegroup]['phrases']);
 		}
 	}

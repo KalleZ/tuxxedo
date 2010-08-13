@@ -56,9 +56,9 @@
 		/**
 		 * Private instance to the Tuxxedo registry
 		 *
-		 * @var		Tuxxedo
+		 * @var		Registry
 		 */
-		protected $tuxxedo;
+		protected $registry;
 
 		/**
 		 * User information
@@ -105,19 +105,19 @@
 		 */
 		public function __construct($autodetect = true, $session = true)
 		{
-			global $tuxxedo;
+			global $registry;
 
-			$this->tuxxedo = $tuxxedo;
+			$this->registry = $registry;
 
 			if($session && $autodetect)
 			{
-				$this->session 		= $tuxxedo->register('session', 'Session');
+				$this->session 		= $registry->register('session', 'Session');
 				$this->sessiondm	= Datamanager::factory('session', Session::$id, false);
 
 				if(($userid = Session::get('userid')) !== false && !empty($userid) && ($userinfo = $this->getUserInfo($userid, 'id', self::OPT_SESSION)) !== false && $userinfo->password == Session::get('password'))
 				{
 					$this->userinfo		= $userinfo;
-					$this->usergroupinfo	= $tuxxedo->cache->usergroups[$userinfo->usergroupid];
+					$this->usergroupinfo	= $registry->cache->usergroups[$userinfo->usergroupid];
 				}
 			}
 
@@ -133,8 +133,8 @@
 			if($session)
 			{
 				$this->sessiondm['userid']		= (isset($this->userinfo->id) ? $this->userinfo->id : 0);
-				$this->sessiondm['location']		= $tuxxedo->db->escape(TUXXEDO_SELF);
-				$this->sessiondm['useragent']		= $tuxxedo->db->escape(TUXXEDO_USERAGENT);
+				$this->sessiondm['location']		= $registry->db->escape(TUXXEDO_SELF);
+				$this->sessiondm['useragent']		= $registry->db->escape(TUXXEDO_USERAGENT);
 			}
 		}
 
@@ -147,11 +147,11 @@
 			{
 				$this->sessiondm->save();
 
-				$this->tuxxedo->db->query('
+				$this->registry->db->query('
 								DELETE FROM 
 									`' . TUXXEDO_PREFIX . 'sessions` 
 								WHERE 
-									`lastactivity` + %d < %d', $this->tuxxedo->options->cookie_expires, TIMENOW_UTC);
+									`lastactivity` + %d < %d', $this->registry->options->cookie_expires, TIMENOW_UTC);
 			}
 		}
 
@@ -190,11 +190,11 @@
 				return(false);
 			}
 
-			Tuxxedo_Session::set('userid', $userinfo->id);
-			Tuxxedo_Session::set('password', $userinfo->password);
+			Session::set('userid', $userinfo->id);
+			Session::set('password', $userinfo->password);
 
 			$this->userinfo			= $userinfo;
-			$this->usergroupinfo		= $this->tuxxedo->cache->usergroups[$userinfo->usergroupid];
+			$this->usergroupinfo		= $this->registry->cache->usergroups[$userinfo->usergroupid];
 			$this->sessiondm['userid'] 	= $userinfo->id;
 
 			$this->tuxxedo->set('userinfo', $userinfo);
@@ -271,7 +271,7 @@
 
 			if($options & self::OPT_SESSION)
 			{
-				$query = $this->tuxxedo->db->query('
+				$query = $this->registry->db->query('
 									SELECT
 										' . TUXXEDO_PREFIX . 'sessions.*, 
 										' . TUXXEDO_PREFIX . 'users.*
@@ -283,18 +283,18 @@
 											' . TUXXEDO_PREFIX . 'sessions.userid = ' . TUXXEDO_PREFIX . 'users.id 
 										WHERE 
 											' . TUXXEDO_PREFIX . 'users.%s = \'%s\' 
-									LIMIT 1', $this->tuxxedo->db->escape($identifier_field), $this->tuxxedo->db->escape($identifier));
+									LIMIT 1', $this->registry->db->escape($identifier_field), $this->registry->db->escape($identifier));
 			}
 			else
 			{
-				$query = $this->tuxxedo->db->query('
+				$query = $this->registry->db->query('
 									SELECT 
 										* 
 									FROM 
 										`' . TUXXEDO_PREFIX . 'users` 
 									WHERE 
 										`%s` = \'%s\'
-									LIMIT 1', $this->tuxxedo->db->escape($identifier_field), $this->tuxxedo->db->escape($identifier));
+									LIMIT 1', $this->registry->db->escape($identifier_field), $this->registry->db->escape($identifier));
 			}
 
 			if($query && $query->getNumRows())
@@ -330,9 +330,9 @@
 
 				return(false);
 			}
-			elseif(isset($this->tuxxedo->cache->usergroups[$id]))
+			elseif(isset($this->registry->cache->usergroups[$id]))
 			{
-				return($this->tuxxedo->cache->usergroups[$id]);
+				return($this->registry->cache->usergroups[$id]);
 			}
 
 			return(false);

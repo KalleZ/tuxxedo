@@ -27,9 +27,9 @@
 		/**
 		 * Private instance to the Tuxxedo registry
 		 *
-		 * @var		Tuxxedo
+		 * @var		Registry
 		 */
-		protected $tuxxedo;
+		protected $registry;
 
 		/**
 		 * Reference to the template storage
@@ -46,7 +46,7 @@
 		 * @param	Tuxxedo_Style		Reference to the style object
 		 * @param	object			Object reference to the templates data table
 		 */
-		abstract protected function __construct(Tuxxedo $tuxxedo, Style $style, stdClass $templates);
+		abstract protected function __construct(Registry $registry, Style $style, stdClass $templates);
 
 		/**
 		 * Caches a template, trying to cache an already loaded 
@@ -72,7 +72,7 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception on invalid style storage engines
 		 */ 
-		final public static function factory(Tuxxedo $tuxxedo, Style $style, $engine, stdClass $templates)
+		final public static function factory(Registry $registry, Style $style, $engine, stdClass $templates)
 		{
 			$class = 'Style\Storage\\' . $engine;
 
@@ -85,6 +85,6 @@
 				throw new Exception\Basic('Corrupt style storage engine');
 			}
 
-			return(new $class($tuxxedo, $style, $templates));
+			return(new $class($registry, $style, $templates));
 		}
 	}

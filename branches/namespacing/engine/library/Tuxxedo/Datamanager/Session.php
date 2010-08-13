@@ -60,9 +60,9 @@
 		 * @param	Tuxxedo			The Tuxxedo object reference
 		 * @param	integer			Session identifier
 		 */
-		public function __construct(Tuxxedo $tuxxedo, $identifier = NULL)
+		public function __construct(Registry $registry, $identifier = NULL)
 		{
-			$this->tuxxedo 		= $tuxxedo;
+			$this->registry 		= $registry;
 
 			$this->dmname		= 'session';
 			$this->tablename	= TUXXEDO_PREFIX . 'sessions';

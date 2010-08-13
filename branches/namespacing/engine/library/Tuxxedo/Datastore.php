@@ -30,9 +30,9 @@
 		/**
 		 * Private instance to the Tuxxedo registry
 		 *
-		 * @var		Tuxxedo
+		 * @var		Registry
 		 */
-		protected $tuxxedo;
+		protected $registry;
 
 		/**
 		 * Holds the cached elements from the datastore
@@ -47,9 +47,9 @@
 		 */
 		public function __construct()
 		{
-			global $tuxxedo;
+			global $registry;
 
-			$this->tuxxedo = $tuxxedo;
+			$this->registry = $registry;
 		}
 
 		/**
@@ -106,7 +106,7 @@
 						DELETE FROM 
 							`' . TUXXEDO_PREFIX . 'datastore` 
 						WHERE 
-							`name` = \'%s\';', $this->tuxxedo->db->escape($name));
+							`name` = \'%s\';', $this->registry->db->escape($name));
 			}
 			else
 			{
@@ -121,17 +121,17 @@
 							(
 								\'%s\', 
 								\'%s\'
-							);', $this->tuxxedo->db->escape($name), $this->tuxxedo->db->escape(serialize($data)));
+							);', $this->registry->db->escape($name), $this->registry->db->escape(serialize($data)));
 			}
 
 			if($delay)
 			{
-				$this->tuxxedo->db->setShutdownQuery($sql);
+				$this->registry->db->setShutdownQuery($sql);
 
 				return(true);
 			}
 
-			$retval = $this->tuxxedo->db->query($sql);
+			$retval = $this->registry->db->query($sql);
 
 			if($retval)
 			{
@@ -165,7 +165,7 @@
 				return(false);
 			}
 
-			$result = $this->tuxxedo->db->query('
+			$result = $this->registry->db->query('
 								SELECT 
 									`name`, 
 									`data` 
@@ -176,7 +176,7 @@
 									IN
 									(
 										\'%s\'
-									);', join('\', \'', array_map(Array($this->tuxxedo->db, 'escape'), $elements)));
+									);', join('\', \'', array_map(Array($this->registry->db, 'escape'), $elements)));
 
 			if($result === false)
 			{

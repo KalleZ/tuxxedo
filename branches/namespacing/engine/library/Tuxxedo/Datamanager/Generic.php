@@ -50,9 +50,9 @@
 		 * @param	Tuxxedo			The Tuxxedo object reference
 		 * @param	array			Options for the generic datamanagers
 		 */
-		public function __construct(Tuxxedo $tuxxedo, Array $options = NULL)
+		public function __construct(Registry $registry, Array $options = NULL)
 		{
-			$this->tuxxedo 		= $tuxxedo;
+			$this->registry 		= $registry;
 
 			$this->dmname		= 'generic';
 			$this->information	= &$this->userdata;

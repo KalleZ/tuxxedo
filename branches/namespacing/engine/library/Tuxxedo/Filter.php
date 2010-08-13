@@ -104,7 +104,7 @@
 		 * @param	array			The options array
 		 * @return	object			Object instance
 		 */
-		public static function invoke(Tuxxedo $tuxxedo, Array $configuration, Array $options)
+		public static function invoke(Registry $registry, Array $configuration, Array $options)
 		{
 			self::$have_filter_ext 		= extension_loaded('filter');
 			self::$have_magic_quotes	= get_magic_quotes_gpc();

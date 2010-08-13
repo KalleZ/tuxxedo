@@ -29,9 +29,9 @@
 		/**
 		 * Private instance to the Tuxxedo registry
 		 *
-		 * @var		Tuxxedo
+		 * @var		Registry
 		 */
-		protected $tuxxedo;
+		protected $registry;
 
 		/**
 		 * HTTP request object
@@ -67,9 +67,9 @@
 		 *
 		 * @param	Tuxxedo			The Tuxxedo object reference
 		 */
-		public function __construct(Tuxxedo $tuxxedo)
+		public function __construct(Registry $registry)
 		{
-			$this->tuxxedo = $tuxxedo;
+			$this->registry = $registry;
 		}
 
 		/**
@@ -139,7 +139,7 @@
 			/**
 		 	 * @TODO	This will change once the Tuxxedo_View class is implemented
 			 */
-			eval('$view = "' . $this->tuxxedo->style->fetch($this->view) . '";');
+			eval('$view = "' . $this->registry->style->fetch($this->view) . '";');
 			eval('return("' . $this->layout . '");');
 		}
 	}

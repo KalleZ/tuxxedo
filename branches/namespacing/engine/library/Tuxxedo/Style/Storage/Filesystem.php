@@ -39,9 +39,9 @@
 		 * @param	Tuxxedo_Style		Reference to the style object
 		 * @param	object			Object reference to the templates data table
 		 */
-		protected function __construct(Tuxxedo $tuxxedo, \Tuxxedo\Style $style, stdClass $templates)
+		protected function __construct(Registry $registry, \Tuxxedo\Style $style, stdClass $templates)
 		{
-			$this->tuxxedo 		= $tuxxedo;
+			$this->registry 		= $registry;
 			$this->templates	= $templates;
 			$this->path		= TUXXEDO_DIR . '/styles/' . $style['styledir'] . '/templates/';
 		}

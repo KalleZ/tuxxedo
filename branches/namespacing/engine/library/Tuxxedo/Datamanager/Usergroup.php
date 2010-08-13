@@ -59,9 +59,9 @@
 		 * @throws	Tuxxedo_Exception	Throws an exception if the usergroup id is set and it failed to load for some reason
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if a database call fails
 		 */
-		public function __construct(Tuxxedo $tuxxedo, $identifier = NULL)
+		public function __construct(Registry $registry, $identifier = NULL)
 		{
-			$this->tuxxedo 		= $tuxxedo;
+			$this->registry 		= $registry;
 
 			$this->dmname		= 'usergroup';
 			$this->tablename	= TUXXEDO_PREFIX . 'usergroups';
@@ -70,7 +70,7 @@
 
 			if($identifier !== NULL)
 			{
-				$usergroups = $tuxxedo->db->query('
+				$usergroups = $registry->db->query('
 									SELECT 
 										* 
 									FROM 
@@ -105,7 +105,7 @@
 			
 			$datastore[(integer) $this->identifier] = $virtual;
 
-			return($tuxxedo->cache->rebuild('usergroups', $datastore));
+			return($registry->cache->rebuild('usergroups', $datastore));
 		}
 
 		/**

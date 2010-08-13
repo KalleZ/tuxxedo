@@ -144,7 +144,7 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Only thrown on poorly a configured database section in the configuration file
 		 */
-		final public static function invoke(Tuxxedo $tuxxedo, array $configuration, array $options)
+		final public static function invoke(array $configuration, array $options)
 		{
 			if(!isset($configuration['database']) || !isset($configuration['database']['driver']))
 			{
@@ -163,7 +163,7 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if loading of a driver should fail for some reason
 		 */
-		final public static function factory($driver, Array $configuration)
+		final public static function factory($driver, array $configuration)
 		{
 			if(in_array($driver, self::$loaded_drivers))
 			{

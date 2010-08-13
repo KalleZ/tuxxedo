@@ -34,5 +34,5 @@
 		 * @param	array			A virtually populated array from the datamanager abstraction
 		 * @return	boolean			Returns true if the datastore was updated with success, otherwise false
 		 */
-		public function rebuild(Tuxxedo $tuxxedo, Array $virtual);
+		public function rebuild(Registry $registry, Array $virtual);
 	}
