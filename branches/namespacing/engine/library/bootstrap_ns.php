@@ -41,15 +41,22 @@
 	 */
 	define('TUXXEDO_LIBRARY', TUXXEDO_DIR . '/library');
 
+    /**
+     * Start autoloading
+     */
+    set_include_path(get_include_path() . PATH_SEPARATOR . TUXXEDO_LIBRARY);
+    require "Tuxxedo/Loader.php";
+    spl_autoload_register("Tuxxedo\Loader::load");
+
 	/**
 	 * Configuration
 	 */
-	require(TUXXEDO_LIBRARY . '/configuration.php');
+	require('configuration.php');
 
 	/**
 	 * Include general functions
 	 */
-	require(TUXXEDO_LIBRARY . '/Tuxxedo/functions.php');
+	require('Tuxxedo/functions.php');
 
 	/**
 	 * Set various handlers for errors, exceptions and 
@@ -58,7 +65,6 @@
 	set_error_handler('Tuxxedo\tuxxedo_error_handler');
 	set_exception_handler('Tuxxedo\tuxxedo_exception_handler');
 	register_shutdown_function('Tuxxedo\tuxxedo_shutdown_handler');
-	spl_autoload_register("Tuxxedo\Loader::load");
 
 	/**
 	 * Set database table prefix constant
@@ -102,7 +108,7 @@
 		/**
 		 * Include the debugging functions
 		 */
-		require(TUXXEDO_LIBRARY . '/functions_debug.php');
+		require('Tuxxedo/functions_debug.php');
 	}
 
 	/**
@@ -110,22 +116,19 @@
 	 */
 	error_reporting(-1);
 
-	use \Tuxxedo\Core;
-	use \Tuxxedo\Core\Exceptions;
-	use \Tuxxedo\Core\Interfaces;
-
-	use \Tuxxedo\User;
+	use Tuxxedo\Exception;
+	use Tuxxedo\User;
 
 	/**
 	 * Construct the main registry
 	 */
-	$tuxxedo = Core\Registry::init($configuration);
+	$tuxxedo = Tuxxedo\Registry::init($configuration);
 
 	/**
 	 * Set globals
 	 */
-	Core\Registry::globals('error_reporting', 	true);
-	Core\Registry::globals('errors', 		Array());
+	Tuxxedo\Registry::globals('error_reporting', 	true);
+	Tuxxedo\Registry::globals('errors', 		Array());
 
 	/**
 	 * Set the UTC timestamp, we need this for things such as 
