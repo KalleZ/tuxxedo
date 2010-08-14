@@ -13,6 +13,7 @@
     * Replace with Registry references.
   # ~~Remove index.htmls from directories.~~
   # Update the api_analyze.php script to work with namespaced code for the generators
+  # Port devtools to use namespaced classes (perhaps MVC at the same time).
 
 = Components =
 Striked-through are ported to namespaces.
