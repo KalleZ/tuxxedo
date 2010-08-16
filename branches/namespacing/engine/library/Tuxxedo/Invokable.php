@@ -50,6 +50,6 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Only thrown on poorly a configured database section in the configuration file
 		 */
-		public static function invoke(Registry $registry, array $configuration);
+		public static function invoke(Registry $registry, array $configuration array $options);
 	}
 ?>

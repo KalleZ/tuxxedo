@@ -70,10 +70,10 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if an invalid (or not cached) style id was used
 		 */
-		public static function invoke(Tuxxedo $tuxxedo, Array $configuration = NULL, Array $options = NULL)
+		public static function invoke(Registry $registry, Array $configuration = NULL, Array $options = NULL)
 		{
-			$styledata 	= $tuxxedo->cache->styleinfo;
-			$styleid	= ($options ? (isset($tuxxedo->userinfo->id) && $tuxxedo->userinfo->style_id !== NULL && $tuxxedo->userinfo->style_id != $options['style_id'] ? $tuxxedo->userinfo->style_id : $options['style_id']) : 0);
+			$styledata 	= $registry->cache->styleinfo;
+			$styleid	= ($options ? (isset($registry->userinfo->id) && $registry->userinfo->style_id !== NULL && $registry->userinfo->style_id != $options['style_id'] ? $registry->userinfo->style_id : $options['style_id']) : 0);
 
 			if($styleid && isset($styledata[$styleid]))
 			{

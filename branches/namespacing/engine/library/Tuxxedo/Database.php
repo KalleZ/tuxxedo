@@ -144,7 +144,7 @@
 		 *
 		 * @throws	Tuxxedo_Basic_Exception	Only thrown on poorly a configured database section in the configuration file
 		 */
-		final public static function invoke(array $configuration, array $options)
+		final public static function invoke(Registry $registry, array $configuration, array $options)
 		{
 			if(!isset($configuration['database']) || !isset($configuration['database']['driver']))
 			{
