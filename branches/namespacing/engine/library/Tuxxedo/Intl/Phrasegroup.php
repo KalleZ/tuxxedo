@@ -12,7 +12,7 @@
 	 * =============================================================================
 	 */
 
-	namespace Tuxxedo\Internationalization;
+	namespace Tuxxedo\Intl;
 
 	/**
 	 * Internationalization phrasegroup class
