@@ -12,7 +12,7 @@
 	 * =============================================================================
 	 */
 	
-	namespace Tuxxedo\Datamanager;
+	namespace Tuxxedo\Datamanager\Adapter;
 	use Tuxxedo\Exception;
 	
 	/**
@@ -22,7 +22,7 @@
 	 * @version	1.0
 	 * @package	Engine
 	 */
-	class User extends \Tuxxedo\Datamanager implements APICache
+	class User extends \Tuxxedo\Datamanager\Adapter implements APICache
 	{
 		/**
 		 * Fields for validation of users

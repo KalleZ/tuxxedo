@@ -12,7 +12,7 @@
 	 * =============================================================================
 	 */
 	
-	namespace Tuxxedo\Datamanager;
+	namespace Tuxxedo\Datamanager\Adapter;
 	use Tuxxedo\Exception;
 	
 	/**
@@ -22,7 +22,7 @@
 	 * @version	1.0
 	 * @package	Engine
 	 */
-	class Generic extends \Tuxxedo\Datamanager
+	class Generic extends \Tuxxedo\Datamanager\Adapter
 	{
 		const OPT_TABLENAME		= 1;
 		const OPT_IDENTIFIERNAME	= 2;

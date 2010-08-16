@@ -11,21 +11,21 @@
 	 *
 	 * =============================================================================
 	 */
-	 
-	namespace Tuxxedo\Datamanager;
+	
+	namespace Tuxxedo\Datamanager\Adapter;
 	use Tuxxedo\Exception;
 	
-	/**
-	 * Datamanager for usergroups
+		/**
+	 * Datamanager for styles
 	 *
 	 * @author	Kalle Sommer Nielsen <kalle@tuxxedo.net>
 	 * @version	1.0
 	 * @package	Engine
 	 */
-	class Usergroup extends \Tuxxedo\Datamanager implements APICache
+	class Style extends \Tuxxedo\Datamanager\Adapter implements APICache
 	{
 		/**
-		 * Fields for validation of usergroups
+		 * Fields for validation of styles
 		 *
 		 * @var		array
 		 */
@@ -33,92 +33,82 @@
 							'id'		=> Array(
 											'type'		=> self::FIELD_PROTECTED
 											), 
-							'title'		=> Array(
+							'name'		=> Array(
 											'type'		=> self::FIELD_REQUIRED, 
 											'validation'	=> self::VALIDATE_STRING
 											), 
-							'type'		=> Array(
+							'developer'	=> Array(
 											'type'		=> self::FIELD_REQUIRED, 
-											'validation'	=> self::VALIDATE_CALLBACK, 
-											'callback'	=> Array(__CLASS__, 'isValidType')
+											'validation'	=> self::VALIDATE_STRING
 											), 
-							'permissions'	=> Array(
+							'styledir' 	=> Array(
+											'type'		=> self::FIELD_REQUIRED, 
+											'validation'	=> self::VALIDATE_STRING
+											), 
+							'default'	=> Array(
 											'type'		=> self::FIELD_OPTIONAL, 
-											'validation'	=> self::VALIDATE_NUMERIC, 
+											'validation'	=> self::VALIDATE_BOOLEAN, 
 											'default'	=> 0
 											)
 							);
 
 
 		/**
-		 * Constructor, fetches a new usergroup based on its id if set
+		 * Constructor, fetches a new style based on its id if set
 		 *
 		 * @param	Tuxxedo			The Tuxxedo object reference
-		 * @param	integer			The usergroup id
+		 * @param	integer			The style id
 		 *
-		 * @throws	Tuxxedo_Exception	Throws an exception if the usergroup id is set and it failed to load for some reason
+		 * @throws	Tuxxedo_Exception	Throws an exception if the style id is set and it failed to load for some reason
 		 * @throws	Tuxxedo_Basic_Exception	Throws a basic exception if a database call fails
 		 */
 		public function __construct(Registry $registry, $identifier = NULL)
 		{
 			$this->registry 		= $registry;
 
-			$this->dmname		= 'usergroup';
-			$this->tablename	= TUXXEDO_PREFIX . 'usergroups';
+			$this->dmname		= 'style';
+			$this->tablename	= TUXXEDO_PREFIX . 'styles';
 			$this->idname		= 'id';
 			$this->information	= &$this->userdata;
 
 			if($identifier !== NULL)
 			{
-				$usergroups = $registry->db->query('
-									SELECT 
-										* 
-									FROM 
-										`' . TUXXEDO_PREFIX . 'usergroups` 
-									WHERE 
-										`id` = %d', $identifier);
+				$styles = $registry->db->query('
+								SELECT 
+									* 
+								FROM 
+									`' . TUXXEDO_PREFIX . 'styles` 
+								WHERE 
+									`id` = %d
+								LIMIT 1', $identifier);
 
-				if(!$usergroups)
+				if(!$styles || !$styles->getNumRows())
 				{
-					throw new Exception\Basic('Invalid usergroup id passed to datamanager');
+					throw new Exception\Basic('Invalid style id passed to datamanager');
 				}
 
-				$this->data 		= $usergroups->fetchAssoc();
+				$this->data 		= $styles->fetchAssoc();
 				$this->identifier 	= $identifier;
 			}
 		}
 
 		/**
-		 * Save the usergroup in the datastore, this method is called from 
+		 * Save the style in the datastore, this method is called from 
 		 * the parent class in cases when the save method was success
 		 *
 		 * @param	Tuxxedo			The Tuxxedo object reference
 		 * @param	array			A virtually populated array from the datamanager abstraction
 		 * @return	boolean			Returns true if the datastore was updated with success, otherwise false
 		 */
-		public function rebuild(Tuxxedo $tuxxedo, Array $virtual)
+		public function rebuild(Registry $registry, Array $virtual)
 		{
-			if(($datastore = $tuxxedo->cache->usergroups) === false)
+			if(($datastore = $this->registry->cache->styleinfo) === false)
 			{
 				$datastore = Array();
 			}
 			
 			$datastore[(integer) $this->identifier] = $virtual;
 
-			return($registry->cache->rebuild('usergroups', $datastore));
-		}
-
-		/**
-		 * Checks whether a usergroup type is valid, this is 
-		 * used as a callback for the validation filter, hence 
-		 * its staticlly defined
-		 *
-		 * @param	Tuxxedo			Instance to the Tuxxedo registry
-		 * @param	integer			The type to check
-		 * @return	boolean			Returns true if the type is valid, otherwise false
-		 */
-		public static function isValidType(Tuxxedo $tuxxedo, $type)
-		{
-			return($type > 0 && $type < 4);
+			return($this->registry->cache->rebuild('styleinfo', $datastore));
 		}
 	}

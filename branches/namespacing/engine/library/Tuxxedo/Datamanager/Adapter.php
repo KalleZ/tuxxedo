@@ -12,7 +12,7 @@
 	 * =============================================================================
 	 */
 
-	namespace Tuxxedo;
+	namespace Tuxxedo\Datamanager;
 	use Tuxxedo\Exception;
 
 	/**
@@ -26,7 +26,7 @@
 	 * @version		1.0
 	 * @package		Engine
 	 */
-	abstract class Datamanager extends InfoAccess
+	abstract class Adapter extends InfoAccess
 	{
 		/**
 		 * Indicates that a field is required

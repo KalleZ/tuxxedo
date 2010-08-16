@@ -12,7 +12,7 @@
 	 * =============================================================================
 	 */
 	
-	namespace Tuxxedo\Datamanager;
+	namespace Tuxxedo\Datamanager\Adapter;
 	use Tuxxedo\Exception;
 	
 		/**
@@ -22,7 +22,7 @@
 	 * @version	1.0
 	 * @package	Engine
 	 */
-	class Session extends \Tuxxedo\Datamanager
+	class Session extends \Tuxxedo\Datamanager\Adapter
 	{
 		/**
 		 * Fields for validation of styles
