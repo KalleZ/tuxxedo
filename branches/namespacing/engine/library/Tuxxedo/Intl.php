@@ -25,7 +25,7 @@
 	 * @version		1.0
 	 * @package		Engine
 	 */
-	class Internationalization extends InfoAccess implements Invokable
+	class Intl extends InfoAccess implements Invokable
 	{
 		/**
 		 * Private instance to the Tuxxedo registry
