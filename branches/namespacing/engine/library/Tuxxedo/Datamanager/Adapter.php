@@ -200,7 +200,7 @@
 			{
 				if(!$tuxxedo->intl)
 				{
-					throw new Exception\Basic('Internationalization is not instanciated for form data phrases');
+					throw new Exception\Basic('Initialization is not instanciated for form data phrases');
 				}
 
 				if(!$tuxxedo->intl->cache(array('datamanagers')))

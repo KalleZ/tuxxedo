@@ -12,20 +12,6 @@
 	 * =============================================================================
 	 */
 
-
-	/**
-	 * This odd check must be here in order to prevent direct execution 
-	 * of the bootstrap script
-	 */
-	(sizeof(get_included_files()) != 1) or exit;
-
-	/**
-	 * General constant needed to access include files
-	 *
-	 * @var		boolean
-	 */
-	define('TUXXEDO', true);
-
 	/**
 	 * Disable html errors, so error messages dont link to the 
 	 * manual
@@ -55,29 +41,30 @@
 	 */
 	define('TUXXEDO_LIBRARY', TUXXEDO_DIR . '/library');
 
+    /**
+     * Start autoloading
+     */
+    set_include_path(get_include_path() . PATH_SEPARATOR . TUXXEDO_LIBRARY);
+    require "Tuxxedo/Loader.php";
+    spl_autoload_register("Tuxxedo\Loader::load");
+
 	/**
 	 * Configuration
 	 */
-	require(TUXXEDO_LIBRARY . '/configuration.php');
-
-	/**
-	 * Include core classes
-	 */
-	require(TUXXEDO_LIBRARY . '/core.php');
+	require('configuration.php');
 
 	/**
 	 * Include general functions
 	 */
-	require(TUXXEDO_LIBRARY . '/functions.php');
+	require('Tuxxedo/functions.php');
 
 	/**
 	 * Set various handlers for errors, exceptions and 
 	 * shutdown
 	 */
-	set_error_handler('tuxxedo_error_handler');
-	set_exception_handler('tuxxedo_exception_handler');
-	register_shutdown_function('tuxxedo_shutdown_handler');
-	spl_autoload_register(Array('Tuxxedo_Autoloader', 'load'));
+	set_error_handler('Tuxxedo\tuxxedo_error_handler');
+	set_exception_handler('Tuxxedo\tuxxedo_exception_handler');
+	register_shutdown_function('Tuxxedo\tuxxedo_shutdown_handler');
 
 	/**
 	 * Set database table prefix constant
@@ -121,7 +108,7 @@
 		/**
 		 * Include the debugging functions
 		 */
-		require(TUXXEDO_LIBRARY . '/functions_debug.php');
+		require('Tuxxedo/functions_debug.php');
 	}
 
 	/**
@@ -129,16 +116,19 @@
 	 */
 	error_reporting(-1);
 
+	use Tuxxedo\Exception;
+	use Tuxxedo\User;
+
 	/**
 	 * Construct the main registry
 	 */
-	$tuxxedo = Tuxxedo::init($configuration);
+	$tuxxedo = Tuxxedo\Registry::init($configuration);
 
 	/**
 	 * Set globals
 	 */
-	Tuxxedo::globals('error_reporting', 	true);
-	Tuxxedo::globals('errors', 		Array());
+	Tuxxedo\Registry::globals('error_reporting', 	true);
+	Tuxxedo\Registry::globals('errors', 		Array());
 
 	/**
 	 * Set the UTC timestamp, we need this for things such as 
@@ -149,7 +139,7 @@
 	/**
 	 * Register the default instances
 	 */
-	$tuxxedo->load(Array('db', 'cache'), false);
+//	$tuxxedo->load(Array('db', 'cache'), false);
 
 	/**
 	 * Precache elements from datastore
@@ -157,53 +147,53 @@
 	$cache_buffer		= Array();
 	$default_precache 	= Array('options', 'styleinfo', 'usergroups', 'languages', 'phrasegroups');
 
-	$cache->cache((!isset($precache) ? $default_precache : array_merge($default_precache, (array) $precache)), $cache_buffer) or tuxxedo_multi_error('Unable to load datastore element \'%s\', datastore possibly corrupted', $cache_buffer);
+//	$cache->cache((!isset($precache) ? $default_precache : array_merge($default_precache, (array) $precache)), $cache_buffer) or tuxxedo_multi_error('Unable to load datastore element \'%s\', datastore possibly corrupted', $cache_buffer);
 
 	/**
 	 * Now the datastore is loaded we must instanciate the 
 	 * user session, note that the invoke method sets the 
 	 * cookie parameters and starts session itself here
 	 */
-	$tuxxedo->register('user', 'Tuxxedo_User');
+//	$tuxxedo->register('user', 'User\Registry');
 
 	/**
 	 * Options and configuration references
 	 */
-	$tuxxedo->set('options', (object) Tuxxedo::getOptions());
+//	$tuxxedo->set('options', $datastore->options);
 	$tuxxedo->set('configuration', $configuration);
 
 	/**
 	 * User information references
 	 */
-	$tuxxedo->set('userinfo', $user->getUserInfo(NULL, NULL, Tuxxedo_User::OPT_CURRENT_ONLY));
-	$tuxxedo->set('usergroup', $user->getUserGroupInfo());
+//	$tuxxedo->set('userinfo', $user->getUserInfo(NULL, NULL, Tuxxedo_User::OPT_CURRENT_ONLY));
+//	$tuxxedo->set('usergroup', $user->getUserGroupInfo());
 
 	/**
 	 * Date and Timezone references
 	 */
-	$tz = strtoupper(empty($userinfo->id) ? $options->date_timezone : $userinfo->timezone);
+//	$tz = strtoupper(empty($userinfo->id) ? $options->date_timezone : $userinfo->timezone);
 
-	if($tz != 'UTC')
+//	if($tz != 'UTC')
 	{
-		date_default_timezone_set($tz);
+//		date_default_timezone_set($tz);
 	}
 
-	$tuxxedo->set('timezone', new DateTimeZone($tz));
-	$tuxxedo->set('datetime', new DateTime('now', $timezone));
+//	$tuxxedo->set('timezone', new DateTimeZone($tz));
+//	$tuxxedo->set('datetime', new DateTime('now', $timezone));
 
-	unset($tz);
+//	unset($tz);
 
 	/**
 	 * Current time constant
 	 */
-	define('TIMENOW', $datetime->getTimestamp());
+//	define('TIMENOW', $datetime->getTimestamp());
 
 	/**
 	 * We can only load the styling & internationalization APIs 
 	 * once the datastore elements are loaded and user sessions 
 	 * have been instanciated
 	 */
-	$tuxxedo->load(Array('style', 'intl'), false);
+//	$tuxxedo->load(Array('style', 'intl'), false);
 
 	/**
 	 * Precache templates
@@ -225,7 +215,7 @@
 		$default_templates = array_merge($default_templates, (array) $action_templates[(string) $_REQUEST['do']]);
 	}
 
-	$style->cache((!isset($templates) ? $default_templates : array_merge($default_templates, (array) $templates)), $cache_buffer) or tuxxedo_multi_error('Unable to load template \'%s\'', $cache_buffer);
+//	$style->cache((!isset($templates) ? $default_templates : array_merge($default_templates, (array) $templates)), $cache_buffer) or tuxxedo_multi_error('Unable to load template \'%s\'', $cache_buffer);
 
 	unset($cache_buffer);
 
@@ -238,18 +228,18 @@
 					'global'
 					);
 
-	$intl->cache((!isset($phrasegroups) ? $default_phrasegroups : array_merge($default_phrasegroups, (array) $phrasegroups)), $cache_buffer) or tuxxedo_multi_error('Unable to load phrase groups \'%s\'', $cache_buffer);
+//	$intl->cache((!isset($phrasegroups) ? $default_phrasegroups : array_merge($default_phrasegroups, (array) $phrasegroups)), $cache_buffer) or tuxxedo_multi_error('Unable to load phrase groups \'%s\'', $cache_buffer);
 
 	unset($cache_buffer);
 
 	/**
 	 * Get phrases
 	 */
-	$tuxxedo->set('phrase', $intl->getPhrases());
+//	$tuxxedo->set('phrase', $intl->getPhrases());
 
 	/**
 	 * Header and footer templates for the main site
 	 */
-	eval('$header = "' . $style->fetch('header') . '";');
-	eval('$footer = "' . $style->fetch('footer') . '";');
+//	eval('$header = "' . $style->fetch('header') . '";');
+//	eval('$footer = "' . $style->fetch('footer') . '";');
 ?>

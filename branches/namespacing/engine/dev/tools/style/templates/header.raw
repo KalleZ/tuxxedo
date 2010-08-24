@@ -53,7 +53,6 @@
 			color:				#3B7286;
 			font-family:			"Helvetica Neue", Helvetica, Trebuchet MS, Verdana, Tahoma, Arial, sans-serif;
 			font-size:			82%;
-			margin-top:			30px;
 		}
 		code
 		{
@@ -197,6 +196,7 @@
 		{
 			background:			#044968 url('./style/images/top-background.png') repeat-x top left;
 			border-radius:			4px;
+			margin-bottom:			10px;
 			padding:			0px 4px;
 
 			-moz-border-radius:		4px;
@@ -263,8 +263,6 @@
 				</ul>
 				<div class="clear"></div>
 			</div>
-			<br />
-
 <if expression="isset($debug_notice)">
 			<div class="box">
 				Warning, your configuration had debug mode set to false. This was automaticlly 

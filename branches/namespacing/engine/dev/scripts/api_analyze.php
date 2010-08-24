@@ -109,7 +109,7 @@
 					{
 						$datamap[$file][$context->type_multiple][$context->{$context->type}]['constants'][] = $const;
 
-						printf('- CONSTANT (%s)<br />', $const);
+						printf('- CLASS CONSTANT (%s)<br />', $const);
 					}
 					else
 					{
@@ -189,13 +189,19 @@
 		{
 			$t = $tokens[$start_index + $inc - 1];
 
-			if(is_array($t) && $searching_for_token && $t[0] === $token)
+			if(is_array($t) && $searching_for_token)
 			{
-				return($t[1]);
+				if($t[0] == $token)
+				{
+					return($t[1]);
+				}
 			}
-			elseif($t === $token)
+			else
 			{
-				return($start_index + $inc);
+				if($t == $token)
+				{
+					return($start_index + $inc);
+				}
 			}
 		}
 
