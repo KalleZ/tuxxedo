@@ -1,0 +1,13 @@
+
+
+	Configuration parsers
+	---------------------
+
+	Configuration parsers that allows interfaces to Xml, Ini and even JSON 
+	when fully implemented.
+
+
+	Maintainers:
+	------------
+	Ross
+	Kalle

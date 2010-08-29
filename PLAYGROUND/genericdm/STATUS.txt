@@ -1,0 +1,11 @@
+
+
+	Generic Datamanager
+	-------------------
+
+	Generic datamanager interface for creating datamanagers on the fly
+
+
+	Maintainers:
+	------------
+	Kalle

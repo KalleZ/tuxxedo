@@ -1,0 +1,12 @@
+
+
+	Query Builder
+	---------------------
+
+	Query builder for allowing an object oriented interface to generate SQL 
+	without having to worry about cross database compatibility.
+
+	Maintainers:
+	------------
+	Ross
+	Kalle
