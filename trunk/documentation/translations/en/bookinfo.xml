@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info xmlns="http://docbook.org/ns/docbook" version="lillet" xml:id="bookinfo">
+	<pubdate>&tuxxedo.build-date;</pubdate>
+	&frontpage.editors;
+
+	<copyright>
+		<year>2006-2010</year>
+		<holder>Tuxxedo Software Development</holder>
+	</copyright>
+</info>
