@@ -1,0 +1,27 @@
+
+
+
+	Tuxxedo Engine 1.0.0 Beta 1
+	---------------------------
+
+	Improve development tools (Kalle)
+	 - Add styles & Templates support
+	 - Re-implement old tools
+	   - Options
+
+	Namespaces (Kalle, Ross)
+	 - Redesign bootstrap.php from the ground and up to make it easier to work on
+	 - Fix the autoloader to possibly support include_path again and such
+	 - Fix tabs vs spaces and all that happens to be very inconsistent in the engine
+	 - Fix docblocks
+
+
+
+	Tuxxedo Engine 1.0.0 Beta 2
+	---------------------------
+
+	MVC improvements (Kalle, Ross)
+	 - Implement the View classes
+
+	Core (Kalle)
+	 - Add a flag or new query method to escape all arguments sent to ->query()
