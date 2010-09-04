@@ -1,0 +1,64 @@
+#summary Introducing to the design of the Template Engine in Tuxxedo
+
+= Introduction =
+
+The Tuxxedo Engine provides its own full blown Templating engine. Like many others, this templating system have two stages, a compilation stage and a execution stage. A template is compiled before it can be used by the Engine.
+
+= Compilation =
+
+The compilation stage translates (compiles) the easy readable markup language into PHP executable code, that can either be stored at the file system (*.raw & *.tuxx files) or at the database.
+
+The compilation process is really heavy and slow, but in the end optimizes the code so its much faster, and better encapsulated. Due to the nature of a non-interpreted compiler, all templates are required to be compiled before they can successfully be used within the user land code (execution).
+
+Below demonstrates how the compiler is used, alternatives with a GUI interface do exists (/dev/tools/tools.php?do=compiler). The compiler is non style depended, and compiles a template at the time, this is done by the following:
+
+{{{
+/* Namespace aliases */
+use Tuxxedo\Exception;
+use Tuxxedo\Style;
+use Tuxxedo\Style\Compiler;
+
+/* Sample markup code, contains a condition and a form */
+$markup = <<<MARKUP
+<if expression="isset($name)">
+        Hello {$name}
+<else />
+        <form action="./" method="post">
+                <p>Enter your name: <input type="text" name="name" /></p>
+                <input type="submit" value="Greet" />
+        </form>
+</if>
+MARKUP;
+
+/* Start the compiler and tell it what markup to compile */
+$compiler = new Style\Compiler;
+$compiler->set($markup);
+
+try
+{
+        /* Attempt to compile the template, this may throw an exception */
+        $compiler->compile();
+
+        /* Test if the compiled template worked, this prevents fatal errors at runtime */
+        if(!$compiler->test())
+        {
+                throw new Exception\TemplateCompiler('Syntax error while attempting to execute compiled code');
+        }
+}
+catch(Exception\TemplateCompiler $e)
+{
+        /* Simple wrapper for outputting the compilation error */
+        tuxxedo_doc_error($e);
+}
+
+/* Done, show the differences */
+echo('<h2>Original markup</h2>');
+echo('<pre>');
+echo(htmlspecialchars($markup);
+echo('</pre>');
+
+echo('<h2>Compiled markup</h2>');
+echo('<pre>');
+echo(htmlspecialchars($compiler->get());
+echo('</pre>');
+}}}
