@@ -13,10 +13,14 @@ The compilation process is really heavy and slow, but in the end optimizes the c
 Below demonstrates how the compiler is used, alternatives with a GUI interface do exists (/dev/tools/tools.php?do=compiler). The compiler is non style depended, and compiles a template at the time, this is done by the following:
 
 {{{
+<?php
+/* Bootstraper */
+require('./library/bootstrap.php');
+
 /* Namespace aliases */
 use Tuxxedo\Exception;
-use Tuxxedo\Style;
-use Tuxxedo\Style\Compiler;
+use Tuxxedo\Template;
+use Tuxxedo\Template\Compiler;
 
 /* Sample markup code, contains a condition and a form */
 $markup = <<<MARKUP
@@ -31,7 +35,7 @@ $markup = <<<MARKUP
 MARKUP;
 
 /* Start the compiler and tell it what markup to compile */
-$compiler = new Style\Compiler;
+$compiler = new Template\Compiler;
 $compiler->set($markup);
 
 try
@@ -54,11 +58,14 @@ catch(Exception\TemplateCompiler $e)
 /* Done, show the differences */
 echo('<h2>Original markup</h2>');
 echo('<pre>');
-echo(htmlspecialchars($markup);
+echo(htmlspecialchars($markup));
 echo('</pre>');
 
 echo('<h2>Compiled markup</h2>');
 echo('<pre>');
-echo(htmlspecialchars($compiler->get());
+echo(htmlspecialchars($compiler->get()));
 echo('</pre>');
+?>
 }}}
+
+THIS GUIDE IS BROKEN AND INCOMPLETE, DO NOT RELY ON IT YET!
