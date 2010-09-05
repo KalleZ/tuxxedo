@@ -119,6 +119,8 @@ MARKUP;
 
 When compiling, it will tell us that $product->getPrice() is not allowed ($product is not an allowed instance). To do so, we will have to call $compiler->allowClass($class_name); This should be called like $compiler->allowClass('product'); and then the compilation method. Note that once an instance is allowed, all method calls are allowed, any regular visibility rules applies here.
 
+Closures, are allowed too, either where a variable is assigned to a callback, or if a variable is an instance of the Closure class. These can be defined by the allowClosure() method of the compiler class.
+
 = Execution =
 
 Execution is done by eval() statements, to allow variable interpolation.
@@ -184,9 +186,196 @@ unset($error_buffer);
 }}}
 
 
+== Template assignments ==
+
+Because of the design of the template engine, templates are essentially just PHP variables that can be interpolated. This means that you can define common templates like a header or footer so they can be included into a full page template, this can be done like so:
+
+{{{
+/* Set header and footer */
+eval('$header = "' . $style->fetch('header') . '";');
+eval('$footer = "' . $style->fetch('footer') . '";');
+
+/* Later set the page content */
+eval(page('test'));
+}}}
+
+The above example defines two new variables, $header and $footer with the content of each respective contents as variables so they can be replaced within another template. The magic page function is essentially just an echo statement, but it can be used in any context as it will inherit two special variables, $header and $footer.
+
+Note that common templates such as header and footer should be defined within the bootstraper.
+
+Lets look at what the script would produce, here are the template contents:
+
+*header*
+{{{
+<html>
+<head>
+<title>Hello World</title>
+</head>
+<body>
+}}}
+
+*footer*
+{{{
+</body>
+</html>
+}}}
+
+*test*
+{{{
+{$header}
+
+<p>Hello world</p>
+
+{$footer}
+}}}
+
+and the final result would be:
+{{{
+<html>
+<head>
+<title>Hello World</title>
+</head>
+<body>
+<p>Hello world</p>
+</body>
+</html>
+}}}
+
+== Errors, redirects, ... ==
+
+Engine have something thats internally called 'gui mode', this means once the \Tuxxedo\Style class have been loaded and the bootstraper is done, it will be in GUI mode, meaning that its possible to show errors using user defined templates.
+
+throwing a new \Tuxxedo\Exception will call tuxxedo_gui_error() and procedure an error using the defined theming.
+
+To redirect, call tuxxedo_redirect() and the user is prompted to be redirected.
+
+
+Note that these two special conditions are called within their own scope, so its not possible to inherit variables like {$test} within the templates and must be called like {$GLOBALS['test']}.
+
+== Variables ==
+
+As written in the sample header/footer example, then variables are PHP variables and can be inherited, like so:
+
+*Markup*
+{{{
+<p>Hello {$name}</p>
+}}}
+
+*Code*
+{{{
+$name = 'Kalle';
+
+eval(page('greeting'));
+}}}
+
+Prints:
+{{{
+<p>Hello Kalle</p>
+}}}
+
+== Concatenated templates ==
+
+Applications that needs to output lists of data, like search results you will need to concatenate templates. This is done using the assign-concatenate operator in PHP like so:
+
+{{{
+/* Must be here, to prevent notices when iterating */
+$search_results = '';
+
+foreach($search->getResults() as $result)
+{
+        eval('$search_results = "' . $style->fetch('search_results_row') . '";');
+}
+
+eval(page('search_results'));
+}}}
+
+The templates used, could looks like this to show how it works:
+
+*search_results_row*
+{{{
+<li>{$result}</li>
+}}}
+
+*search_results*
+{{{
+<h3>Search results</h3>
+
+<ul>
+{$search_results}
+</ul>
+}}}
+
+And the final output will be:
+{{{
+<h3>Search results</h3>
+
+<ul>
+<li>Practical PHP Programming</li>
+<li>PHP Programming</li>
+</ul>
+}}}
+
+Now lets take this example a bit further to illustrate how expressions also can go into the mix. This is out script code, note that the Search class just for the sake of this example and is not real:
+{{{
+/* Search all books named something with PHP in their title */
+$search = new Search('books', 'PHP', Array('title'));
+
+if(!$search->getNumResults())
+{
+        throw new \Tuxxedo\Exception('No books matched PHP in their title');
+}
+
+$results = '';
+
+foreach($search->getResults() as $result)
+{
+        /* str_replace('PHP', '<b>PHP</>', $result->title); */
+        $result->title = $search->highlight('<b>%s</b>', $result->title);
+
+        eval('$results .= "' . $style->fetch('search_results_row') . '";');
+}
+
+eval(page('search_results'));
+}}}
+
+The search_results template here is still the same, and the 'search_results_row' template have been changed to the following:
+{{{
+<li>
+<if expression="!$result->in_stock">
+<span style="color: red;">
+</if>
+
+{$result->title} by <em>{$result->author}</em>
+
+<if expression="!$result->in_stock">
+</span>
+</if>
+</li>
+}}}
+
+As you can see the markup is a lot more _fancy_ and more dynamic.
+
+== Quotes! ==
+
+Quotes are very important within the execution stage, as you might remember then all double quotes are escaped by the compiler. This is because PHP uses double quotes for variable interpolation within strings.
+
+This means that the eval() statement must always looks like this:
+{{{
+eval('$something = '"' . $style->fetch('something_template') . '";');
+}}}
+
+Which converted into:
+{{{
+$number = 42;
+$something = "This is the something template with a variable, that have the value of {$number}";
+}}}
+
+So $something now have the value of:
+{{{
+This is the something template with a variable, that have the value of 42
+}}}
+
 TODO
-  * Execution - Page functions
-  * Execution - Concatenated template rows
-  * Execution - Variables
+  * Default templates
   * Markup language specification
   * Page labels
