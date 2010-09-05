@@ -6,7 +6,7 @@ The Tuxxedo Engine provides its own full blown Templating engine. Like many othe
 
 = Compilation =
 
-The compilation stage translates (compiles) the easy readable markup language into PHP executable code, that can either be stored at the file system (*.raw & *.tuxx files) or at the database.
+The compilation stage translates (compiles) the easy readable markup language into PHP executable code, that can either be stored at the file system (.raw & .tuxx files) or at the database.
 
 The compilation process is really heavy and slow, but in the end optimizes the code so its much faster, and better encapsulated. Due to the nature of a non-interpreted compiler, all templates are required to be compiled before they can successfully be used within the user land code (execution).
 
@@ -23,7 +23,7 @@ use Tuxxedo\Template;
 use Tuxxedo\Template\Compiler;
 
 /* Sample markup code, contains a condition and a form */
-$markup = <<<MARKUP
+$markup = <<<'MARKUP'
 <if expression="isset($name)">
         Hello {$name}
 <else />
@@ -68,4 +68,117 @@ echo('</pre>');
 ?>
 }}}
 
-THIS GUIDE IS BROKEN AND INCOMPLETE, DO NOT RELY ON IT YET!
+Executing the above will show something similar to:
+
+=== Original markup ===
+{{{
+<if expression="isset($name)">
+        Hello {$name}
+<else />
+        <form action="./" method="post">
+                <p>Enter your name: <input type="text" name="name" /></p>
+                <input type="submit" value="Greet" />
+        </form>
+</if>
+}}}
+
+=== Compiled markup ===
+{{{
+" . ((isset($name)) ? ("
+        Hello {$name}
+") : ("
+        <form action=\"./\" method=\"post\">
+                <p>Enter your name: <input type=\"text\" name=\"name\" /></p>
+                <input type=\"submit\" value=\"Greet\" />
+        </form>
+")) . "
+}}}
+
+As you can see the PHP variables are still there, the conditionals have been converted into ternary expressions and all double quotes have been escaped to allow variable interpolation (which is how the executed template is performed, but more about that later).
+
+Special characters like \t would normally get convert into 0x9 (horizontal tab) but the compiler is smart enough to skip all the special characters that can be interpolated within regular PHP strings.
+
+== Special compilation rules ==
+
+When the compiler hits an expression, it will look if there is a function call, or if there is a method call.
+
+By default, only the follow small subset of functions (procedural) are allowed: defined(), sizeof() & count(). The empty() and isset() language constructs are allowed too. To allow custom functions, simply call $compiler->allowFunction($function_name);
+
+Special verbose operators, etc are allowed too: AND, OR, XOR & Array().
+
+Methods are a bit tricky, since the compiler cannot figure out what instance $user refers to in this context: $user->isLoggedIn(). Then you must explicitly tell the compiler that $user is an object, so it can emulated it when calling the test(), and when checking if the instance is allowed within an expression call. By default the compiler allows the following two instances to be allowed within templates, as they are the most common: $user & $usergroup.
+
+Lets have a quick example, our markup looks like this:
+{{{
+$markup = <<<'MARKUP'
+<if expression="($price = $product->getPrice()) !== false">
+        Product price is: {$price} dollars
+</if>
+MARKUP;
+}}}
+
+When compiling, it will tell us that $product->getPrice() is not allowed ($product is not an allowed instance). To do so, we will have to call $compiler->allowClass($class_name); This should be called like $compiler->allowClass('product'); and then the compilation method. Note that once an instance is allowed, all method calls are allowed, any regular visibility rules applies here.
+
+= Execution =
+
+Execution is done by eval() statements, to allow variable interpolation.
+
+If we use the following markup code again:
+{{{
+$markup = <<<'MARKUP'
+<if expression="isset($name)">
+        Hello {$name}
+<else />
+        <form action="./" method="post">
+                <p>Enter your name: <input type="text" name="name" /></p>
+                <input type="submit" value="Greet" />
+        </form>
+</if>
+MARKUP;
+}}}
+
+Once that is stored within a storage engine, we can now fetch it. Note that as of writing, we do not provide an internal API for modifying templates, but its subject to the next major release of the Engine. But lets suggest that we stored the above compiled markup in a template named 'greeting'.
+
+=== Loading ===
+
+There is two ways of loading templates, pre loading and manually loading. Pre loading can be done in two ways, templates that needs to be loaded upon startup must be declared before the default bootstraper is included. The two types of pre loading are global templates, meaning templates that will be available all the time, second is action templates and is only loaded once a specific action is execute.
+
+*Global templates*
+
+Global templates are defined like:
+{{{
+$templates = Array('greeting', 'someother_template', ...);
+}}}
+
+This makes the listed templates required for the page to load.
+
+
+*Action templates*
+
+Action templates are loaded only if a specific action is executed, an action is determined by ?do=actionname:
+
+{{{
+$action_templates = Array(
+                                'actionname' => Array('special_template1'), 
+                                'other' => Array('template1', 'template2', ...)
+                                );
+}}}
+
+If no action is defined or there is no action templates for the default action, then no templates is loaded. If we used the above example and requested ?do=actionname, then besides the global templates if any requested, the 'special_template1' would be loaded too.
+
+
+*Manual loading*
+
+Manual loading are only available once the bootstraper is done executing, this is done by calling the style object's cache method like so:
+
+{{{
+$style->cache(Array('template1', 'template2', ...));
+}}}
+
+To handle errors here, the Engine provides a simple way to see which template that failed to load, one at the time:
+
+{{{
+$error_buffer = Array();
+$style->cache(Array('template1', 'template2'), $error_buffer) or tuxxedo_multi_error('Failed to load template named \'%s\'', $error_buffer);
+unset($error_buffer);
+}}}
