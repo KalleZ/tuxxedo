@@ -374,8 +374,3 @@ So $something now have the value of:
 {{{
 This is the something template with a variable, that have the value of 42
 }}}
-
-TODO
-  * Default templates
-  * Markup language specification
-  * Page labels
