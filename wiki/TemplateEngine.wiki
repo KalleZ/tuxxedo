@@ -329,7 +329,7 @@ $results = '';
 
 foreach($search->getResults() as $result)
 {
-        /* str_replace('PHP', '<b>PHP</>', $result->title); */
+        /* str_replace('PHP', '<b>PHP</b>', $result->title); */
         $result->title = $search->highlight('<b>%s</b>', $result->title);
 
         eval('$results .= "' . $style->fetch('search_results_row') . '";');
