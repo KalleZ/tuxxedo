@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Tuxxedo Software Engine
+	 * Tuxxedo Software Documentation
 	 * =============================================================================
 	 *
 	 * @author		Kalle Sommer Nielsen 	<kalle@tuxxedo.net>
@@ -9,7 +9,7 @@
 	 * @copyright		Tuxxedo Software Development 2006+
 	 * @license		Apache License, Version 2.0
 	 * @package		Engine
-	 * @subpckage		Library
+	 * @subpckage		Documentation
 	 *
 	 * =============================================================================
 	 */
@@ -20,14 +20,10 @@
 	 * on the default included packages within PhD.
 	 *
 	 * All original authors are credited within all the documentation 
-	 * rendering code here.
+	 * rendering code here from where it was base on.
 	 *
 	 * @author		Kalle Sommer Nielsen			<kalle@tuxxedo.net>
 	 * @author		Ross Masters 				<ross@tuxxedo.net>
-	 * @author		Hannes Magnusson			<bjori@php.net>
-	 * @author		Christian Weiske 			<cweiske@php.net>
-	 * @author		Moacir de Oliveira Miranda Júnior	<moacir@php.net>
-	 * @author		Rudy Nappée				<loudi@php.net>
 	 * @version		1.0
 	 * @package		Engine
 	 * @subpackage		Documentation
@@ -40,10 +36,7 @@
 	 *
 	 * @author		Kalle Sommer Nielsen			<kalle@tuxxedo.net>
 	 * @author		Ross Masters 				<ross@tuxxedo.net>
-	 * @author		Hannes Magnusson			<bjori@php.net>
-	 * @author		Christian Weiske 			<cweiske@php.net>
 	 * @author		Moacir de Oliveira Miranda Júnior	<moacir@php.net>
-	 * @author		Rudy Nappée				<loudi@php.net>
 	 * @version		1.0
 	 * @package		Engine
 	 * @subpackage		Documentation
@@ -56,13 +49,9 @@
 		 * @var		array
 		 */
 		protected $formats	= Array(
-/*
 						'xhtml'		=>	'Package_Tuxxedo_ChunkedXHTML', 
-						'bigxhtml'	=>	'Package_Tuxxedo_BigXHTML', 
-						'php'		=>	'Package_Tuxxedo_Web', 
-						'chm'		=>	'Package_Tuxxedo_CHM', 
-						'tocfeed'	=>	'Package_Tuxxedo_TocFeed'
-*/
+						'web'		=>	'Package_Tuxxedo_Web', 
+						'chm'		=>	'Package_Tuxxedo_CHM'
 						);
 
 
