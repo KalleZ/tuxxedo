@@ -6,16 +6,21 @@ managing large web applications. It contains components for MVC applications,
 database connectivity, an ActiveRecord ORM, a query-builder and user
 authentication & authorisation management, along with a session manager.
 
-Tuxxedo's still in a fairly early state, things to excuse for now (that will be
-fixed later):
-
-* Components will be more decoupled later on.
-* Classes will be moved to their own files.
-  * With a better directory structure.
-  * And an autoloader to make loading them easier.
 
 
-Copyright 2006 Tuxxedo Software Development
+Tuxxedo Documentor
+==================
+
+Tuxxedo Documentor is a lexical analyzer similar to that of the phpDocumentor 
+project. However, the only output format is Docbook XML designed for usage 
+with the PhD (PHP Documentation Renderer) project.
+
+
+
+License
+=======
+
+Copyright 2006 Tuxxedo Software Development, w/Kalle Sommer Nielsen
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
