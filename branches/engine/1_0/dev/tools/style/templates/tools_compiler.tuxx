@@ -1,0 +1,77 @@
+{$header}
+
+<form action=\"./tools.php?do=compiler\" method=\"post\">
+<div class=\"box\">
+	<h4>Template compiler</h4>
+
+	<p>
+		This tools allows you to test and compile templates that doesn't 
+		belong to any specify style. The output is the compiled markup 
+		code found in <em>.tuxx</em> files.
+	</p>
+
+	<br />
+	<textarea name=\"sourcecode\" cols=\"100\" rows=\"15\">{$source}</textarea>
+</div>
+
+<div class=\"box\">
+	<h4>Compiler options</h4>
+
+	<p>
+		Compiler options are special overrides to allow bypassing certain 
+		restrictions in conditionals. Note that non standard calls, like 
+		application specific routines <em>will not</em> execute here in 
+		this basic sandbox test.
+	</p>
+	<br />
+
+	<p>
+		<label>
+			<input type=\"checkbox\" name=\"opt_function_limit\"" . ((isset($_POST['opt_function_limit'])) ? (" checked=\"checked\"") : '') . "> Allow any procedural function call
+		</label>
+	</p>
+	<p>
+		<label>
+			<input type=\"checkbox\" name=\"opt_class_limit\"" . ((isset($_POST['opt_class_limit'])) ? (" checked=\"checked\"") : '') . "> Allow any class to execute
+		</label>
+	</p>
+	<p>
+		<label>
+			<input type=\"checkbox\" name=\"opt_closure_limit\"" . ((isset($_POST['opt_closure_limit'])) ? (" checked=\"checked\"") : '') . "> Allow any closure calls
+		</label>
+	</p>
+	<p>
+		<label>
+			<input type=\"checkbox\" name=\"opt_interpolated_limit\"" . ((isset($_POST['opt_interpolated_limit'])) ? (" checked=\"checked\"") : '') . "> Allow inline interpolated calls
+		</label>
+	</p>
+</div>
+
+<div class=\"box\">
+	<input type=\"submit\" name=\"submit\" value=\"Compile\" />
+</div>
+</form>
+
+" . ((isset($result) && $test) ? ("
+<div class=\"box\">
+	<h4>Result</h4>
+
+	<textarea cols=\"100\" rows=\"15\">{$result}</textarea>
+</div>
+") : '') . "
+" . ((isset($error) || isset($test) && !$test) ? ("
+<div class=\"box\">
+	<p class=\"error\">
+" . ((isset($test)) ? ("
+		There was a parse error in one of the conditionals that 
+		caused the compilation to bail. Check if the PHP syntax is 
+		correct.
+") : ("
+		Compilation did not pass, the following error was emitted:
+		<br /><code>{$error}</code>
+")) . "
+	</p>
+</div>
+") : '') . "
+
+{$footer}
