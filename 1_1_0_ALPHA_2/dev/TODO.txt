@@ -1,0 +1,30 @@
+
+
+
+	Tuxxedo Engine 1.1.0 Beta 1
+	------------------------------------------------
+
+	Datamanagers
+[B]	 - Fix delete default style does not specify a new default style
+[B]	 - Fix some datamanagers that doesn't use callbacks for validating cached data
+	 - Fix possible delete error in the followng datamanagers (Hooks\Cache):
+[B]	   - Option
+[B]	   - Permission
+
+	DevTools
+	 - Options
+[F]	   - Add the ability to re-define default values for options
+[C]	   - Change the options dev tool to work with the options datamanager
+
+	Helpers
+[F]	 - Implement a generic pagination class with handlers for database and other generic ones based on an interface
+
+
+	Tuxxedo Engine 1.1.0 Release Candidate 1
+	------------------------------------------------
+
+	Core
+	 - Branch 1_1_0
+	 - Make trunk 1_2_0
+	 - Update version
+	 - Update TODO
