@@ -1,0 +1,83 @@
+
+
+	Tuxxedo Engine Future
+	---------------------
+	
+
+	Add new datamanagers
+	 - Language
+	 - Phrase
+	 - Phrasegroup
+    
+	Improve development tools
+	 - Add internationalization support
+	   - Language
+	     - Add
+	     - Edit
+	     - Delete
+	     - List
+	   - Phrasegroup
+	     - Add
+	     - Edit
+	     - Delete
+	     - List
+	   - Phrase
+	     - Add
+	     - Edit
+	     - Delete
+	     - Search
+	 - Add user and usergroups support
+	   - User
+	     - Add
+	     - Edit
+	     - Delete
+	     - Search
+	   - Usergroup
+	     - List
+	     - Add
+	     - Edit
+	     - Delete
+	   - Permission
+	     - List
+	     - Add
+	     - Edit
+	     - Delete
+	 - Add the DevTools theme as its own style rather than its hackery it is now
+	 - Implement installation generators
+	 - Other
+	   - Add the ability to export/import styles
+	   - Add the ability to export/import languages
+
+	Implement documentation generators for the google wiki unless we have setup a custom thing up somewhere
+	Implement validators
+	Implement some handler registry so we dont have to re-invent the wheel everytime a component may have handlers
+	Implement a form of Webservices handler backend that can be used to pull and push
+	 - Authentication support using Engine's authentication system
+	 - Map pull's in an object oriented way so they kinda work like SOAP objects, <error><code>123</code></error>: $api->getError()->getCode() or similar
+	
+	Improve internationalization
+	 - Add the possibility to have different backends for phrases
+	 - Add language auto detection based on the request headers and iso codes for non logged in users
+	 - Add translation for /dev/tools
+	 - Add an unload method to make it possible to unload phrasegroups, make sure to account for rebuilding the phrase index to avoid inconsistencies
+	 - Add a feature so that its possible for MVC controllers to auto load a specific phrase group
+
+	Improve the datastore cacher
+	 - Implement a temporary memory storage, with backends for APC etc.
+	 - Split code from datastore.php into multiple sub classes so they can be executed at userland code without hacks
+	   - Make use of this new API in datamanagers, maybe we can have a new dynamic hook to do this
+
+	Helpers
+	 - Mail
+	 - Upload
+
+	Look at implementing playground projects
+	 - Query builder
+	 - Configuration parser (Xml, Ini, JSON)
+	 - Generic Datamanager
+	 - MVC Request
+	 - API indexer
+
+	Extend the API generator
+	 - Parse parameter prototypes
+	 - Change the parser to fetch docblocks of files
