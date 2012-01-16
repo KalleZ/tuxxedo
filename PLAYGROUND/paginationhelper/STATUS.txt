@@ -1,0 +1,11 @@
+
+
+	Pagination Helper
+	-----------------
+
+	Iteratable pagination helper class
+
+
+	Maintainers:
+	------------
+	Kalle
