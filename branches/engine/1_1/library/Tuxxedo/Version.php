@@ -77,7 +77,7 @@
 		 *
 		 * @var		integer
 		 */
-		const RELEASE			= 0;
+		const RELEASE			= 1;
 
 		/**
 		 * Engine version ID, this contains the version id in the form 
@@ -93,7 +93,7 @@
 		 *
 		 * @var		integer
 		 */
-		const ID			= 10100;
+		const ID			= 10101;
 
 		/**
 		 * Development preview mode, this is set to true if this is a development 
@@ -101,7 +101,7 @@
 		 *
 		 * @var		boolean
 		 */
-		const PREVIEW			= false;
+		const PREVIEW			= true;
 
 		/**
 		 * Development preview type, this is set to the preview type, like 'Alpha', 
@@ -109,7 +109,7 @@
 		 *
 		 * @var		string
 		 */
-		const PREVIEW_TYPE		= '';
+		const PREVIEW_TYPE		= 'Alpha';
 
 		/**
 		 * Development preview number, this is set to the preview number for the 
@@ -117,7 +117,7 @@
 		 *
 		 * @var		integer
 		 */
-		const PREVIEW_NUMBER		= 0;
+		const PREVIEW_NUMBER		= 1;
 
 		/**
 		 * Development codename, this value is always the same for each 
@@ -147,6 +147,6 @@
 		 *
 		 * @var		string
 		 */
-		const FULL			= '1.1.0 "Fawks"';
+		const FULL			= '1.1.1 "Fawks" Alpha 1 (experimental)';
 	}
 ?>
