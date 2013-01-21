@@ -1,0 +1,22 @@
+{$header}
+
+<h1>Error</h1>
+<div class=\"box\">
+	{$message}
+
+	" . ((isset($error_list)) ? ("
+	<ul>
+		{$error_list}
+	</ul>
+	") : '') . "
+</div>
+
+" . ((isset($go_back) && $go_back) ? ("
+<br />
+
+<div class=\"box\">
+	<input type=\"button\" onclick=\"history.back(-1);\" value=\"Go back\" />
+</div>
+") : '') . "
+
+{$footer}
