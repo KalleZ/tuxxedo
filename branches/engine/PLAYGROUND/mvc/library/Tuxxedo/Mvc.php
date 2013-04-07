@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	 * Tuxxedo Software Engine
 	 * =============================================================================
@@ -11,45 +11,7 @@
 	 *
 	 * =============================================================================
 	 */
-
-	 //namespace Tuxxedo;
-	
-	/**
-	 * Mvc container, contains the mvc app
-	 */
-	class Mvc
-	{
-		/*
-		 * Router object.
-		 *
-		 *@var		object
-		 */
-		 private static $router;
-		 
-		 /*
-		 * View object.
-		 *
-		 *@var		object
-		 */
-		 private static $view;
-		 
-		 /*
-		 * Controller object.
-		 *
-		 *@var		object
-		 */
-		 private static $controller;
-		
-		/**
-		 * Registry object
-		 *
-		 *@var		object
-		 */
-		 private static $registry;
-		
-		public static function init()
-		{
-			self::$registry	= Registry::init();
-			self::$router	= new Router();
-		}
-	}
+	 
+	 namespace Tuxxedo;
+	 
+	 echo 'random';
