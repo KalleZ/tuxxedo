@@ -13,3 +13,8 @@
 	 */
 	 
 	 namespace Tuxxedo;
+	 
+	 class Mvc
+	 {
+	 
+	 }
