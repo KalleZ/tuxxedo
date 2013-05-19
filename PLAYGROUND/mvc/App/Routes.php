@@ -20,16 +20,14 @@
 	/**
 	 * Register url and request methods
 	 */
-	/*Url::get('test/[char]/[numeric]',array('alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'),function(){
-
+	Url::get('test/{=charater}/{=numeric}',['alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'],'controller:action',function(){
+		echo 'asd eho lol';
 	});
 
-	Url::get('test',function(){
-		
-	});*/
+	Url::get('test','test:index');
 
-	Url::Group('random/newbie/[numeric]',array('check' => 'userPermission|userLoggedIn'),function($opt){
-		Url::post(function(){
+	Url::Group('random/newbie/{=numeric}',array('check' => 'userPermission|userLoggedIn'),function($opt){
+		Url::post(['alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'],'controller:action',function(){
 
 		});
 
@@ -37,7 +35,7 @@
 
 		});
 
-		Url::put(Array('check' => 'apiKey'),function(){
+		Url::put(['check' => 'apiKey'],function(){
 
 		});
 
@@ -46,8 +44,12 @@
 		});
 	});
 
-	/*Url::get('random/newbie1/(numeric)',function(){
+	Url::get('random/newbie1/{=numeric}',function(){
 		echo 'er nu blevet super';
-	});*/
+	});
 
-	var_dump(Url::test());
+	//var_dump(Url::test());
+
+	$route	= Url::_getRoute(REQUEST_URI);
+	var_dump($route);
+	//var_dump(REQUEST_URI);
