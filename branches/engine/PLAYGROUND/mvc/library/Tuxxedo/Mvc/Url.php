@@ -3,7 +3,7 @@
 	 * Tuxxedo Software Engine
 	 * =============================================================================
 	 *
-	 * @author		Christiana Hoffbeck		<chhoffbeck@gmail.com>
+	 * @author		Christian Hoffbeck		<chhoffbeck@gmail.com>
 	 * @version		1.0
 	 * @copyright		Tuxxedo Software Development 2006+
 	 * @license		Apache License, Version 2.0
@@ -125,17 +125,17 @@
 					die('Error in first argument, has to bee string');
 				}
 				
-				if(!isset($args[1]) || (isset($args[1]) && !in_array(gettype($args[1]),['string','array','object'])) || (isset($args[1]) && is_object($args[1]) === true && !$args[1] instanceof \Closure))
+				if(!isset($args[1]) || (isset($args[1]) && !in_array(gettype($args[1]),['string','array','object'])) || (isset($args[1]) && is_object($args[1]) === true && !($args[1] instanceof \Closure)))
 				{
 					die('Error in the second argument, has to be either array, closure or a string<br>Route: ' . $args[0] . '<br>Request method: ' . $name);
 				}
 
-				if((isset($args[2]) && !in_array(gettype($args[2]),['string','object'])) || (isset($args[2]) && is_object($args[2]) === true && !$args[2] instanceof \Closure))
+				if((isset($args[2]) && !in_array(gettype($args[2]),['string','object'])) || (isset($args[2]) && is_object($args[2]) === true && !($args[2] instanceof \Closure)))
 				{
 					die('Error in the third argument, has to be either array, closure or a string<br>Route: ' . $args[0] . '<br>Request method: ' . $name);
 				}
 
-				if(isset($args[3]) && is_object($args[3]) === true && !$args[3] instanceof \Closure)
+				if(isset($args[3]) && is_object($args[3]) === true && !($args[3] instanceof \Closure))
 				{
 					die('Error in the fourth argument, has to be an closure<br>Route: ' . $args[0] . '<br>Request method: ' . $name);
 				}
@@ -164,18 +164,17 @@
 			} 
 			else
 			{
-				if(!isset($args[0]) || (isset($args[1]) && !in_array(gettype($args[0]),['string','array','object'])) || (isset($args[0]) && is_object($args[0]) === true && !$args[0] instanceof \Closure))
+				if(!isset($args[0]) || (isset($args[1]) && !in_array(gettype($args[0]),['string','array','object'])) || (isset($args[0]) && is_object($args[0]) === true && !($args[0] instanceof \Closure)))
 				{
 					die('Error in the first argument within a group collection, has to be an array<br>Route group: ' . self::$route . '<br>Request method: ' . $name);
 				}
 
-				if((isset($args[1]) && !in_array(gettype($args[1]),['string','array','object'])) || (isset($args[1]) && is_object($args[1]) === true && !$args[1] instanceof \Closure))
+				if((isset($args[1]) && !in_array(gettype($args[1]),['string','array','object'])) || (isset($args[1]) && is_object($args[1]) === true && !($args[1] instanceof \Closure)))
 				{
-					var_dump($args);
 					die('Error in the second argument, has to be either array, closure or a string<br>Route: ' . self::$route . '<br>Request method: ' . $name);
 				}
 
-				if((isset($args[2]) && !in_array(gettype($args[2]),['string','object'])) || (isset($args[2]) && is_object($args[2]) === true && !$args[2] instanceof \Closure))
+				if((isset($args[2]) && !in_array(gettype($args[2]),['string','object'])) || (isset($args[2]) && is_object($args[2]) === true && !($args[2] instanceof \Closure)))
 				{
 					die('Error in the third argument, has to be either array, closure or a string<br>Route: ' . self::$route . '<br>Request method: ' . $name);
 				}
@@ -212,10 +211,10 @@
 		/**
 		 * Register a group of routes, with the router.
 		 *
-		 * @param  [type] $route    [description]
-		 * @param  [type] $options  [description]
-		 * @param  [type] $callback [description]
-		 * @return [type]           [description]
+		 * @param	String	$route		The group route.
+		 * @param 	Array	$options	The global route options.
+		 * @param	Closure	$callback	The callback method, this will hold all child methods.
+		 * @return	Void
 		 */
 		public static function group($route,$options,$callback)
 		{
@@ -237,14 +236,14 @@
 		 * @param 	String $url		Current url string.
 		 * @return	Array			An array of all options for the route.
 		 */
-		public static function _getRoute($url)
+		public static function _getRoute($method,$url)
 		{
-			if(isset(self::$routes[REQUEST_METHOD][$url]))
+			if(isset(self::$routes[$method][$url]))
 			{
-				return(self::$routes[REQUEST_METHOD][$url]);
+				return(self::$routes[$method][$url]);
 			}
 			
-			$route	= self::_getUrlRouteMatch($url);
+			$route	= self::_getUrlRouteMatch($url,$method);
 
 			if($route !== false)
 			{
@@ -261,7 +260,7 @@
 		 * @param 	String	$url		Current url.
 		 * @return	Boolean|Array		Returns false on no match, otherwise array
 		 */
-		private function _getUrlRouteMatch($url,$request = REQUEST_METHOD)
+		private function _getUrlRouteMatch($url,$request)
 		{
 			if(empty(self::$routes[$request]))
 			{
