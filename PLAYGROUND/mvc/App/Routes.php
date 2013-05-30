@@ -20,13 +20,13 @@
 	/**
 	 * Register url and request methods
 	 */
-	Url::get('test/{=charater}/{=numeric}',['alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'],'controller:action',function(){
+	Url::get('test/{=charater}/{=numeric}',['alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'],'{1}:action',function(){
 		echo 'asd eho lol';
 	});
 
-	Url::get('test','test:index');
+	//Url::get('test','test:index');
 
-	Url::Group('random/newbie/{=numeric}',array('check' => 'userPermission|userLoggedIn'),function($opt){
+	/*Url::Group('random/newbie/{=numeric}',array('check' => 'userPermission|userLoggedIn'),function($opt){
 		Url::post(['alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'],'controller:action',function(){
 
 		});
@@ -46,10 +46,4 @@
 
 	Url::get('random/newbie1/{=numeric}',function(){
 		echo 'er nu blevet super';
-	});
-
-	//var_dump(Url::test());
-
-	$route	= Url::_getRoute(REQUEST_URI);
-	var_dump($route);
-	//var_dump(REQUEST_URI);
+	});*/
