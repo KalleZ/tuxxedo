@@ -1,0 +1,66 @@
+{$header}
+
+" . (($orphan) ? ("
+<div class=\"box\">
+	<h3>Note</h3>
+
+	<p>
+		Orphan options are options thats not assigned to a valid 
+		category, or no category at all. Note that this is a virtual 
+		category and it will disapear once all below options have 
+		a valid category.
+	</p>
+</div>
+") : '') . "
+
+" . (($reminder) ? ("
+<div class=\"warning\">
+	<h3>Warning</h3>
+
+	<p>
+		Not all elements are cached in the datastore or some may be 
+		outdated, you need to rebuild the datastore for these changes 
+		to take effect.
+	</p>
+</div>
+") : '') . "
+
+" . ((isset($categories) || $orphan) ? ("
+<div class=\"box\">
+	<table cellspacing=\"0\" cellpadding=\"0\" class=\"list\">
+		" . ((isset($categories)) ? ("
+			{$categories}
+		") : '') . "
+		" . (($orphan) ? ("
+			<tr class=\"header\">
+				<td colspan=\"6\" class=\"start-end-connected\">
+					Orphan options
+				</td>
+			</tr>
+			<tr class=\"heading\">
+				<td class=\"start-connected-top\">
+					Name
+				</td>
+				<td>
+					Value
+				</td>
+				<td nowrap=\"nowrap\">
+					Default value
+				</td>
+				<td>
+					Cached?
+				</td>
+				<td nowrap=\"nowrap\">
+					Datastore value
+				</td>
+				<td class=\"end-connected-top\">
+					&nbsp;
+				</td>
+			</tr>
+			{$rows}
+		") : '') . "
+	</table>
+</div>
+") : '') . "
+
+{$footer}
