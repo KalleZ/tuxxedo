@@ -13,7 +13,10 @@
 	 */
 	 
 	 
-	namespace Tuxxedo\Mvc;
+	/**
+	 * Tuxxedo Model-View-Controller bundle
+	 */
+	namespace Tuxxedo\Mvc;	
 	 
 	class Url
 	{
@@ -91,11 +94,11 @@
 			}
 			
 			$route	= strtolower(str_replace('//','/','/' . $route));
-			self::$routes[$method][$route]	= Array(
+			self::$routes[$method][$route]	= [
 								'callback'	=> $callback,
 								'stack'		=> $stack,
 								'options'	=> (isset(self::$routes['group'][$route]) ? array_merge(self::$routes['group'][$route],$options) : $options)
-							);
+							];
 			return;
 		}
 
@@ -140,26 +143,18 @@
 					die('Error in the fourth argument, has to be an closure<br>Route: ' . $args[0] . '<br>Request method: ' . $name);
 				}
 
-				$options	= is_array($args[1]) ? $args[1] : [];
+				$options	= isset($args[1]) && is_array($args[1]) ? $args[1] : [];
 
-				if(is_string($args[1]))
+				if(isset($args[1]) && is_string($args[1]))
 				{
 					$stack	= explode(':',$args[1]);
 				}
-				elseif($args[1] instanceof \Closure)
-				{
-					$callback	= $args[1];
-				}
 
-				if(is_string($args[2]))
+				if(isset($args[2]) && is_string($args[2]))
 				{
 					$stack	= explode(':',$args[2]);
 				}
-				elseif($args[2] instanceof \Closure)
-				{
-					$callback	= $args[2];
-				}
-
+				
 				$route	= $args[0];
 			} 
 			else
@@ -178,32 +173,43 @@
 				{
 					die('Error in the third argument, has to be either array, closure or a string<br>Route: ' . self::$route . '<br>Request method: ' . $name);
 				}
+	
+				if(isset($args[0]) && is_array($args[0]))
+				{
+					$options	= \array_merge($args[0],self::$routes['group'][self::$route]);
+				}
+				elseif(isset($args[1]) && is_array($args[1]))
+				{
+					$options	= \array_merge($args[1],self::$routes['group'][self::$route]);
+				}
+				else
+				{
+					$options	= self::$routes['group'][self::$route];
+				}
 
-				$options	= is_array($args[1]) ? $args[1] : [];
-
-				if(is_string($args[1]))
+				if(isset($args[1]) && is_string($args[1]))
 				{
 					$stack	= explode(':',$args[1]);
 				}
-				elseif($args[1] instanceof \Closure)
-				{
-					$stack		= self::DEFAULT_STACK;
-					$callback	= $args[1];
-				}
 
-				if(is_string($args[2]))
+				if(isset($args[2]) && is_string($args[2]))
 				{
 					$stack	= explode(':',$args[2]);
 				}
-				elseif($args[1] instanceof \Closure)
-				{
-					$stack		= self::DEFAULT_STACK;
-					$callback	= $args[2];
-				}
+
 				$route	= self::$route;
 			}
 
-			$stack	= isset($stack)	? $stack : self::DEFAULT_STACK;
+			if(isset($callback) === false && ($args[\sizeof($args) - 1] instanceof \Closure) === true)
+			{
+				$callback	= $args[\sizeof($args) - 1];
+			}
+			elseif(isset($callback) === false && ($args[\sizeof($args) - 1] instanceof \Closure) === false)
+			{
+				$callback	= NULL;
+			}
+			$stack		= isset($stack)	? $stack : self::DEFAULT_STACK;
+			
 			self::register($name,$route,$options,$stack,$callback);
 			return;
 		}
@@ -240,7 +246,8 @@
 		{
 			if(isset(self::$routes[$method][$url]))
 			{
-				return(self::$routes[$method][$url]);
+
+				return(['route' => self::$routes[$method][$url], 'params' => []]);
 			}
 			
 			$route	= self::_getUrlRouteMatch($url,$method);
@@ -248,10 +255,50 @@
 			if($route !== false)
 			{
 				unset($route['match'],$route['search'],$route['replace'],$route['url']);
-				return($route);
+				return(['route' => self::$routes[$method][$route['route']],'params' => $route['params']]);
 			}
 
+
+			if($route === false)
+			{
+				return(self::_getNonStaticRoute($url));
+			}
 			return(false);
+		}
+
+		private static function _getNonStaticRoute($url)
+		{
+			$url	= (String) $url == '' ? '' : substr($url,1);
+			$stack	= explode(':',self::DEFAULT_STACK);
+			$params	= [];
+
+			if(empty($url))
+			{
+				return(['route' => ['stack' => $stack]]);
+			}
+
+			$url	= (Array) explode('/',(String) $url);
+			$size	= (Integer) sizeof((Array) $url);
+			if($size === 1)
+			{
+				$stack[0]	= $url[0];
+			}
+
+			if($size === 2)
+			{
+				$stack[0]	= $url[0];
+				$stack[1]	= $url[1];
+			}
+
+			if($size > 2)
+			{
+				$stack[0]	= $url[0];
+				$stack[1]	= $url[1];
+				unset($url[0],$url[1]);
+				$params		= $url;
+			}
+
+			return(['route' => ['stack' => $stack],'params' => $params]);
 		}
 
 		/**
@@ -260,7 +307,7 @@
 		 * @param 	String	$url		Current url.
 		 * @return	Boolean|Array		Returns false on no match, otherwise array
 		 */
-		private function _getUrlRouteMatch($url,$request)
+		private static function _getUrlRouteMatch($url,$request)
 		{
 			if(empty(self::$routes[$request]))
 			{
