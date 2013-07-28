@@ -14,7 +14,7 @@
 	 
 	namespace Tuxxedo;
 
-	use Tuxxedo\Mvc\Url;
+	use Tuxxedo\Mvc\Router\Url;
 	//use Tuxxedo\Mvc\Controller;
 	
 	
