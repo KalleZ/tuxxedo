@@ -15,7 +15,7 @@
 	 /**
 	  * Alias rules
 	  */
-	  use Tuxxedo\Mvc\Url;
+	  use Tuxxedo\Mvc\Router\Url;
 	
 	/**
 	 * Register url and request methods
@@ -26,7 +26,7 @@
 
 	Url::get('test','test:index');
 
-	Url::Group('random/newbie/{=numeric}',array('check' => 'userPermission|userLoggedIn'),function($opt){
+	Url::group('random/newbie/{=numeric}',array('check' => 'userPermission|userLoggedIn'),function($opt){
 		Url::post(['alias' => 'test','ext' => '.html','user' => 'hasPermission','redirect' => 'route: 404'],'controller:action',function(){
 
 		});
