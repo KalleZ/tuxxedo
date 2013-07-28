@@ -105,12 +105,14 @@
 		/**
 		 * Set http status code to return.
 		 * 
-		 * @param 	String $status		Http status code.
+		 * @param 	Integer $code		Http status code.
+		 * @param 	String	$message	Message of the status code.
 		 * @return	Void
 		 */
-		protected function _setStatus($status)
+		protected function _setStatus($code,$message)
 		{
-			$this->returnData['status']	= (Integer) $status;
+			$this->returnData['status'][0]	= (Integer) $code;
+			$this->returnData['status'][1]	= (String) $message;
 		}
 
 		/**
@@ -120,6 +122,7 @@
 		 * 
 		 * @param 	Mixed	$offset		Offset has to be either array or string.
 		 * @param 	Mixed	$value		By default value is set to true.
+		 */
 		protected function _setData($offset,$value = true)
 		{
 			if((Boolean) $value === (Boolean) true && (Boolean) is_array($offset) === (Boolean) true)
@@ -132,6 +135,12 @@
 			}
 		}
 
+		/**
+		 * Set costum error string.
+		 * 
+		 * @param 	String	$str		Error string.
+		 * @return 	Void
+		 */
 		protected function _setError($str)
 		{
 			$this->returnData['error']	= (String) $str; 
