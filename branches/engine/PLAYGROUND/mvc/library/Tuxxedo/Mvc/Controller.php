@@ -125,7 +125,7 @@
 		 */
 		protected function _setData($offset,$value = true)
 		{
-			if((Boolean) $value === (Boolean) true && (Boolean) is_array($offset) === (Boolean) true)
+			if((Boolean) $value === true && (Boolean) is_array($offset) === true)
 			{
 				$this->returnData['data']		= \array_merge($this->returnData['data'],$offset);
 			}
