@@ -1,0 +1,31 @@
+
+
+
+	Tuxxedo Engine 1.2.0 "Beloved" pre-gold
+	---------------------------------------
+
+	DevTools
+	 - Add new the internationalization component
+	   - Phrasegroup
+	     - Add
+	     - Edit
+	     - Delete
+	     - List
+	   - Phrase
+	     - Add
+	     - Edit
+	     - Delete
+	     - Reset
+	     - Search
+	 - Change to use the \Tuxxedo\Bootstrap class to remove this clutter code in bootstrap.php
+
+	Database
+	 - Make sure SQLite3 is fully functional
+
+	Internationalization
+	 - Add support for 'resetable' phrases
+	 - Phrases should use ids instead of named groups, which makes validation much easier, but dublicates cached data to some distinct
+
+	Bugs
+	 - Language
+	  - Delete does not remove phrasegroups, may also include phrases too as the code fragment is the same
