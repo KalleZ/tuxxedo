@@ -2,7 +2,6 @@
 
 	Documentation Indexer
 	---------------------
-
 	Documentation indexer is a tool for generating a .sqlite3 database rather 
 	than various .dump files in /dev/api/.
 
