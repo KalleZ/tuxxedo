@@ -1,6 +1,4 @@
 #labels Design,Structure,RFC
-#New folder structure for engine
-
 = Why? =
 
 The new folder structure is based upon the idea for bundles.
