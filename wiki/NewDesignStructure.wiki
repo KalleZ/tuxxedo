@@ -1,0 +1,34 @@
+#labels Design,Structure,RFC
+#New folder structure for engine
+
+= Why? =
+
+The new folder structure is based upon the idea for bundles.
+The structure aims to bring maximum flexebility, for the creator of a bundle to decide what to do.
+
+The current structure has some limtations, in the terms of seperating the core layer from layers above. And it's also head to bring a really god implementation for installing/removing bundles, by script.
+
+
+= Details =
+
+
+{{{
+index.php
+        /library/
+                /Config.php
+                /Bundles/
+                        /{BundleName}/
+                                Config.php
+                /Engine/
+                        /Design/
+                                /Bundle.php
+                        Loader.php
+                        Registry.php
+                        Functions.php
+                        Boostrap.php
+                        Exception.php
+
+}}}
+
+The structure above, is the new proposed structure.
+The BUndles folder, should only contain bundle packs, and thier own design structure. While engine, should only contain the bare minimum core features.
