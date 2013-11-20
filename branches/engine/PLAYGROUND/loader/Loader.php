@@ -83,7 +83,8 @@
 	 		$len	= \strlen(\strrchr($class,'\\'));
 	 		$file	= \substr($class,-$len+1);
 	 		$class 	= \substr($class,0,-$len);
-
+	 		//var_dump($class);
+	 		
 	 		if(isset($this->namespaces[$class]))
 	 		{
 	 			$file	= \str_replace(['\\','//'],'/',$class) . \DIRECTORY_SEPARATOR . $file . '.php';
@@ -95,25 +96,27 @@
 	 			return(false);
 	 		}
 
-	 		$items	= \explode('\\',$class);
-	 		$found	= false;
-	 		$parts	= '';
-	 		foreach($items AS $part)
+	 		$namespace	= $class;
+	 		$count		= substr_count($namespace,'\\');
+	 		$i		= 0;
+	 		$found		= false;
+	 		while($i != $count)
 	 		{
-	 			$parts	= $parts . $part;
-	 			if(isset($this->namespaces[$parts]))
+	 			$current	= \strlen($namespace);
+	 			$namespace	= \substr($namespace,0,-\strlen(\strrchr($namespace,'\\')));
+	 			if(isset($this->namespaces[$namespace]))
 	 			{
 	 				$found	= true;
 	 				break;
 	 			}
-	 			$parts	= $parts . '\\';
+	 			++$i;
 	 		}
 
 	 		if($found === true)
 	 		{
-	 			$file	= \str_replace(['\\','//'],'/',\str_replace($parts,$this->namespaces[$parts],$class) . \DIRECTORY_SEPARATOR . $file . '.php');
+	 			$file	= \str_replace(['\\','//'],'/',\str_replace($namespace,$this->namespaces[$namespace],$class) . \DIRECTORY_SEPARATOR . $file . '.php');
 	 		}
-
+	 		var_dump($file);
 
 	 		if(\file_exists($file))
 	 		{
@@ -123,3 +126,11 @@
 	 		return(false);
 	 	}
 	 }
+
+
+	 $loader	= new Loader([
+	 				'Tuxxedo\Bundles'	=> 'library/Bundles',
+	 				'Tuxxedo\Bundles\Test'	=> 'library/test'
+	 				]);
+
+	 $test		= new \Tuxxedo\Bundles\Test\Random\Lol();
