@@ -116,7 +116,6 @@
 	 		{
 	 			$file	= \str_replace(['\\','//'],'/',\str_replace($namespace,$this->namespaces[$namespace],$class) . \DIRECTORY_SEPARATOR . $file . '.php');
 	 		}
-	 		var_dump($file);
 
 	 		if(\file_exists($file))
 	 		{
@@ -126,11 +125,3 @@
 	 		return(false);
 	 	}
 	 }
-
-
-	 $loader	= new Loader([
-	 				'Tuxxedo\Bundles'	=> 'library/Bundles',
-	 				'Tuxxedo\Bundles\Test'	=> 'library/test'
-	 				]);
-
-	 $test		= new \Tuxxedo\Bundles\Test\Random\Lol();
