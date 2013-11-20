@@ -83,7 +83,6 @@
 	 		$len	= \strlen(\strrchr($class,'\\'));
 	 		$file	= \substr($class,-$len+1);
 	 		$class 	= \substr($class,0,-$len);
-	 		//var_dump($class);
 	 		
 	 		if(isset($this->namespaces[$class]))
 	 		{
