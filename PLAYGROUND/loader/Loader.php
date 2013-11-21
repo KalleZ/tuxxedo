@@ -101,7 +101,6 @@
 	 		$found		= false;
 	 		while($i != $count)
 	 		{
-	 			$current	= \strlen($namespace);
 	 			$namespace	= \substr($namespace,0,-\strlen(\strrchr($namespace,'\\')));
 	 			if(isset($this->namespaces[$namespace]))
 	 			{
