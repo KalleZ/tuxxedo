@@ -96,7 +96,7 @@
 	 		}
 
 	 		$namespace	= $class;
-	 		$count		= substr_count($namespace,'\\');
+	 		$count		= \substr_count($namespace,'\\');
 	 		$i		= 0;
 	 		$found		= false;
 	 		while($i != $count)
