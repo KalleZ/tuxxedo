@@ -54,7 +54,7 @@
 	 		spl_autoload_register([$this,'load']);
 	 		if($namespaces)
 	 		{
-	 			$this->namespaces	= array_merge($namespaces,$this->namespaces);
+	 			$this->namespaces	= $namespaces;
 	 		}
 	 	}
 
