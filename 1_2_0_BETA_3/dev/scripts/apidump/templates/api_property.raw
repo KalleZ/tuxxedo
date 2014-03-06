@@ -1,0 +1,77 @@
+{$header}
+
+<h1>{$name}</h1>
+<div class="box">
+	<div class="inner">
+		<div class="left-content">
+			<fieldset>
+				<legend><strong>Meta information</strong></legend>
+				<table cellspacing="4" cellpadding="0">
+					<tr>
+						<td>Availability:</td>
+						<td class="value" style="width: 100%">
+							Engine {$since}
+						</td>
+					</tr>
+					<tr>
+						<td>Type:</td>
+						<td class="value" style="width: 100%">
+							<a href="{$obj_link}#properties">Property</a>
+						</td>
+					</tr>
+					<tr>
+						<td nowrap="nowrap">Declared in:</td>
+						<td class="value" style="width: 100%" nowrap="nowrap">
+							{$file}
+						</td>
+					</tr>
+					<tr>
+						<td nowrap="nowrap">Data type:</td>
+						<td class="value" style="width: 100%">
+							{$datatype}
+						</td>
+					</tr>
+					{$namespace}
+					<tr>
+						<td>Object:</td>
+						<td class="value" style="width: 100%">
+							<a href="{$obj_link}">{$obj}</a>
+						</td>
+					</tr>
+					{$extendedinfo}
+				</table>
+			</fieldset>
+		</div>
+		<div class="content">
+			<div class="infobox">
+				{$description}
+			</div>
+			<br />
+		</div>
+		<div style="clear: left;"></div>
+	</div>
+</div>
+
+{$notices}
+
+{$warnings}
+
+{$examples}
+
+{$todo}
+
+{$changelog}
+
+<h2><span>See also</span></h2>
+<div class="box edge-title">
+	<div class="inner">
+		<ul>
+			{$seealso}
+			<li><a href="{$obj_link}">{$obj}</a></li>
+			<li><a href="./{$obj_types}.html">List of {$obj_types}</a></li>
+			<li><a href="./index.html">Table of contents</a></li>
+		</ul>
+	</div>
+</div>
+
+{$footer}
