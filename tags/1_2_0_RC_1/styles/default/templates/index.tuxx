@@ -1,0 +1,15 @@
+{$header}
+
+<div class=\"middle\">
+	<h1>Tuxxedo Engine</h1>
+	<h2>Version {$version}</h2>
+
+	<div>
+		<a href=\"./dev/tools/\">DevTools</a>
+		<a href=\"./dev/scripts/apidump/output/\">API Docs</a>
+		<a href=\"http://www.tuxxedo.net/devblog/\">Blog</a>
+		<a href=\"http://code.google.com/p/tuxxedo\">Project</a>
+	</div>
+</div>
+
+{$footer}
