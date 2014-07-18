@@ -43,6 +43,14 @@
 	 	 * @var		Array
 	 	 */
 	 	private $namespaces	= [];
+		
+		/**
+	 	 * The root path of the application.
+	 	 * This will be used for all non-strict saved namespaces:
+	 	 * 
+	 	 * @var		String
+	 	 */
+	 	private $root;
 
 	 	/**
 	 	 * Initialize the loader and register the instance as the autoloader autoloader.
@@ -52,6 +60,7 @@
 	 	public function __construct(Array $namespaces = NULL)
 	 	{
 	 		spl_autoload_register([$this,'load']);
+			$this->root	=	$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR;
 	 		if($namespaces)
 	 		{
 	 			$this->namespaces	= $namespaces;
@@ -63,11 +72,12 @@
 	 	 * 
 	 	 * @param	String		Namespace to register.
 	 	 * @param	String		Folder path to the namespace.
+		 * $param	Boolean		Strict type, this will ensure that only the registered path is used.
 	 	 * @return	void
 	 	 */
-	 	public function register($namespace,$path)
+	 	public function register($namespace,$path,$strict=false)
 	 	{
-	 		$this->namespaces[$namespace]	= $path;
+	 		$this->namespaces[$namespace]	= str_replace(['\\','/'],DS,($strict === false ? $this->root . $path : $path));
 	 	}
 
 	 	/**
@@ -83,10 +93,13 @@
 	 		$len	= \strlen(\strrchr($class,'\\'));
 	 		$file	= \substr($class,-$len+1);
 	 		$class 	= \substr($class,0,-$len);
+			
+			
 	 		
 	 		if(isset($this->namespaces[$class]))
 	 		{
-	 			$file	= \str_replace(['\\','//'],'/',$class) . \DIRECTORY_SEPARATOR . $file . '.php';
+	 			$path	= \str_replace(['\\','//'],DIRECTORY_SEPARATOR,$this->namespaces[$class]) . \DIRECTORY_SEPARATOR;
+				$file	= $path	. $file . '.php';
 	 			if(\file_exists($file))
 	 			{
 	 				require $file;
@@ -109,17 +122,18 @@
 	 			}
 	 			++$i;
 	 		}
-
+			
 	 		if($found === true)
 	 		{
 	 			$file	= \str_replace(['\\','//'],'/',\str_replace($namespace,$this->namespaces[$namespace],$class) . \DIRECTORY_SEPARATOR . $file . '.php');
+				
+				if(\file_exists($file))
+				{
+					require $file;
+					return(true);
+				}
 	 		}
-
-	 		if(\file_exists($file))
-	 		{
-	 			require $file;
-	 			return(true);
-	 		}
+	 		
 	 		return(false);
 	 	}
 	 }
