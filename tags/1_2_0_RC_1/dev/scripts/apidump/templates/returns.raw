@@ -1,8 +1,0 @@
-<h2><span>Returns</span></h2>
-<div class="box edge-title">
-	<div class="inner">
-		<div class="infobox">
-			{$value}
-		</div>
-	</div>
-</div>

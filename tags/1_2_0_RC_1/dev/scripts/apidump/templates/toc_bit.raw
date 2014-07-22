@@ -1,4 +1,0 @@
-<tr class="row">
-	<td nowrap="nowrap"><a href="{$link}">{$name}</a></td>
-	<td nowrap="nowrap" style="width: 100%">{$description}</td>
-</tr>
