@@ -56,7 +56,7 @@
 	 	 *
 		 * @var		string
 		 */
-		const SIMPLE			= '1.1.0';
+		const SIMPLE			= '1.1.1';
 
 		/**
 		 * Major version number
