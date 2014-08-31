@@ -1,0 +1,42 @@
+<tr class=\"heading header\">
+	<td colspan=\"6\" class=\"start end\">
+		{$category}
+
+		<span>
+			<a href=\"./options.php?do=categories&action=edit&category={$category}\">Edit</a> 
+			<a href=\"./options.php?do=categories&action=delete&category={$category}\" class=\"redlink\">Delete</a>
+		</span>
+	</td>
+</tr>
+<tr class=\"heading\">
+	<td class=\"start-connected-top\">
+		Name
+	</td>
+	<td>
+		Value
+	</td>
+	<td nowrap=\"nowrap\">
+		Default value
+	</td>
+	<td>
+		Cached?
+	</td>
+	<td nowrap=\"nowrap\">
+		Datastore value
+	</td>
+	<td class=\"end-connected-top\">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+" . ((isset($rows)) ? ("
+	{$rows}
+") : ("
+	<td colspan=\"6\">
+		<p>
+			There is currently no options assigned to this category, add or edit an 
+			option to list it here.
+		</p>
+	</td>
+")) . "
+</tr>
