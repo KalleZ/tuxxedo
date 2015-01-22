@@ -283,7 +283,7 @@ $search_results = '';
 
 foreach($search->getResults() as $result)
 {
-        eval('$search_results = "' . $style->fetch('search_results_row') . '";');
+        eval('$search_results .= "' . $style->fetch('search_results_row') . '";');
 }
 
 eval(page('search_results'));
